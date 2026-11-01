@@ -1,104 +1,225 @@
-import React from 'react';
-import { ArrowUpRight } from './icons/ArrowUpRight';
+import React, { useState, useRef } from 'react';
+import {
+  BajajCapitalLogo,
+  OrganicIndiaLogo,
+  ExideCareLogo,
+  MTRLogo,
+  RelyconLogo,
+  AntaraLogo,
+  UrjaTechLogo,
+  MyPersonalTutorLogo,
+  AlmmaaiLogo,
+  JaroEducationLogo,
+  ProvidentLogo,
+  RelianceLogo,
+} from './icons/ClientLogos';
 
-interface CaseStudy {
+interface ClientItem {
   id: string;
-  num: string;
-  client: string;
-  category: string;
-  service: string;
-  metric: string;
-  showcaseImg: string;
-  link: string;
+  name: string;
+  Component: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
 }
 
-const CASE_STUDIES: CaseStudy[] = [
-  {
-    id: 'bajaj-capital',
-    num: '01',
-    client: 'BAJAJ CAPITAL',
-    category: 'FINANCIAL SERVICES',
-    service: 'Performance Marketing & Lead Generation',
-    metric: '3,000 leads/month',
-    showcaseImg: '/assets/case-showcase-bajaj.png',
-    link: '#contact'
-  },
-  {
-    id: 'organic-india',
-    num: '02',
-    client: 'ORGANIC INDIA',
-    category: 'E-COMMERCE',
-    service: 'Digital Strategy & Online Sales',
-    metric: '2,000 sales/month',
-    showcaseImg: '/assets/case-showcase-organic-india.png',
-    link: '#contact'
-  },
-  {
-    id: 'exide-care',
-    num: '03',
-    client: 'EXIDE CARE',
-    category: 'POWER BACKUP',
-    service: 'Landing Page CRO & Lead Generation',
-    metric: '10,000 leads/month',
-    showcaseImg: '/assets/case-showcase-exide.png',
-    link: '#contact'
-  },
-  {
-    id: 'mtr-foods',
-    num: '04',
-    client: 'MTR FOODS',
-    category: 'FOOD & FMCG',
-    service: 'Performance Marketing & E-Commerce Sales',
-    metric: '8X ROAS',
-    showcaseImg: '/assets/case-showcase-mtr.png',
-    link: '#contact'
-  }
+const ALL_CLIENTS: ClientItem[] = [
+  { id: 'bajaj-capital', name: 'Bajaj Capital', Component: BajajCapitalLogo },
+  { id: 'organic-india', name: 'Organic India', Component: OrganicIndiaLogo },
+  { id: 'exide-care', name: 'Exide Care', Component: ExideCareLogo },
+  { id: 'mtr', name: 'MTR', Component: MTRLogo },
+  { id: 'relycon', name: 'Relycon', Component: RelyconLogo },
+  { id: 'antara', name: 'Antara Integrated Wellness', Component: AntaraLogo },
+  { id: 'urja-tech', name: 'Urja Tech Industries', Component: UrjaTechLogo },
+  { id: 'mypersonaltutor', name: 'MyPersonalTutor.org', Component: MyPersonalTutorLogo },
+  { id: 'almmaai', name: 'ALMMAI Mind Mentor', Component: AlmmaaiLogo },
+  { id: 'jaro-education', name: 'Jaro Education', Component: JaroEducationLogo },
+  { id: 'provident', name: 'Provident', Component: ProvidentLogo },
+  { id: 'reliance', name: 'Reliance', Component: RelianceLogo },
 ];
 
+const DESKTOP_PAGE_SIZE = 12;
+const MOBILE_PAGE_SIZE = 6;
+
+// Helper to chunk array for responsive pages
+const chunkArray = <T,>(arr: T[], size: number): T[][] => {
+  const chunks: T[][] = [];
+  for (let i = 0; i < arr.length; i += size) {
+    chunks.push(arr.slice(i, i + size));
+  }
+  return chunks;
+};
+
 export const FeaturedWork: React.FC = () => {
+  // Compute chunks dynamically
+  const desktopSlides = chunkArray(ALL_CLIENTS, DESKTOP_PAGE_SIZE);
+  const mobileSlides = chunkArray(ALL_CLIENTS, MOBILE_PAGE_SIZE);
+
+  // Active page state
+  const [desktopSlide, setDesktopSlide] = useState(0);
+  const [mobileSlide, setMobileSlide] = useState(0);
+
+  // Touch gesture support for mobile swiping
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current === null || touchEndX.current === null) return;
+    const distance = touchStartX.current - touchEndX.current;
+    const isLeftSwipe = distance > 45;
+    const isRightSwipe = distance < -45;
+
+    if (isLeftSwipe && mobileSlide < mobileSlides.length - 1) {
+      setMobileSlide((prev) => prev + 1);
+    } else if (isRightSwipe && mobileSlide > 0) {
+      setMobileSlide((prev) => prev - 1);
+    }
+
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+
   return (
-    <section className="work-section" id="work">
-      <div className="container">
-        <div className="section-intro services-intro work-intro">
-          <div className="section-intro-left">
-            <div className="eyebrow">FEATURED WORK</div>
-            <h2>Real Brands Real Results</h2>
-            <p className="section-subheading">
-              Every business has a different challenge. Our work starts by understanding it, finding the right approach and focusing on the outcome that matters.
+    <section className="clients-section" id="work">
+      <div className="container clients-container">
+        {/* Header Block: Left title narrative + Right stat card */}
+        <div className="clients-header">
+          {/* Left Title Area */}
+          <div className="clients-header-left">
+            <div className="clients-eyebrow">
+              <span className="clients-eyebrow-text">OUR CLIENTS</span>
+              <span className="clients-eyebrow-line" aria-hidden="true" />
+            </div>
+
+            <h2 className="clients-heading">
+              Trusted by<br />
+              <span className="clients-heading-gold">Growing Brands</span>
+            </h2>
+
+            <p className="clients-subheading">
+              We work with businesses across industries to build their brand, create with intent and drive real growth.
             </p>
           </div>
+
+          {/* Right Stat Block (Desktop Only) */}
+          <div className="clients-stat-block" aria-label="Across 10+ Industries">
+            <div className="clients-stat-divider" aria-hidden="true" />
+            <div className="clients-stat-content">
+              <span className="clients-stat-label">ACROSS</span>
+              <div className="clients-stat-number">10+</div>
+              <span className="clients-stat-sublabel">INDUSTRIES</span>
+              <p className="clients-stat-desc">
+                From D2C to B2B, we partner with brands across diverse sectors.
+              </p>
+            </div>
+          </div>
         </div>
- 
-        <div className="work-grid">
-          {CASE_STUDIES.map((study) => (
-            <article className="work-card case-study-card" key={study.id}>
-              <div className="case-showcase-window">
-                <img
-                  src={study.showcaseImg}
-                  alt={`${study.client} - ${study.category} Case Study`}
-                  className={`case-showcase-img showcase-${study.id}`}
-                  loading="lazy"
-                />
-              </div>
-              <div className="case-content">
-                <div className="case-meta-header">
-                  <span className="case-num">{study.num}</span>
-                  <span className="case-v-divider" aria-hidden="true"></span>
-                  <div className="case-title-group">
-                    <h3 className="case-title">{study.client}</h3>
-                    <p className="case-service">{study.service}</p>
+
+        {/* Desktop Client Logos Grid/Slider
+            If ALL_CLIENTS <= 12: static 6x2 grid (no dots needed).
+            If ALL_CLIENTS > 12: auto multi-page horizontal slider + dots. */}
+        <div className="clients-desktop-wrapper">
+          {desktopSlides.length === 1 ? (
+            <div className="clients-grid-desktop" aria-label="Clients Grid">
+              {desktopSlides[0].map((client) => {
+                const Logo = client.Component;
+                return (
+                  <div className="client-card" key={client.id} title={client.name}>
+                    <Logo className="client-logo-svg" />
                   </div>
-                </div>
-                <span className="case-divider" aria-hidden="true"></span>
-                <div className="case-metric">{study.metric}</div>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="clients-desktop-slider" aria-label="Clients Multi-Page Slider">
+              <div
+                className="clients-desktop-track"
+                style={{ transform: `translateX(-${desktopSlide * 100}%)` }}
+              >
+                {desktopSlides.map((slideClients, pageIdx) => (
+                  <div className="clients-desktop-slide" key={pageIdx}>
+                    <div className="clients-grid-desktop">
+                      {slideClients.map((client) => {
+                        const Logo = client.Component;
+                        return (
+                          <div className="client-card" key={client.id} title={client.name}>
+                            <Logo className="client-logo-svg" />
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
               </div>
-              <a href={study.link} className="case-action-btn">
-                <span>Explore The Project</span>
-                <ArrowUpRight size={14} strokeWidth={2.4} className="case-btn-arrow" />
-              </a>
-            </article>
-          ))}
+            </div>
+          )}
+
+          {/* Desktop Pagination Dots: only shown when more than 1 page (>12 logos) */}
+          {desktopSlides.length > 1 && (
+            <div className="clients-pagination clients-pagination-desktop" aria-label="Desktop pagination">
+              {desktopSlides.map((_, dotIndex) => (
+                <button
+                  key={dotIndex}
+                  type="button"
+                  className={`clients-dot ${desktopSlide === dotIndex ? 'active' : ''}`}
+                  onClick={() => setDesktopSlide(dotIndex)}
+                  aria-label={`View slide ${dotIndex + 1}`}
+                  aria-current={desktopSlide === dotIndex ? 'true' : 'false'}
+                />
+              ))}
+            </div>
+          )}
         </div>
+
+        {/* Mobile Client Logos Slider (6 cards per slide in 3x2 grid) */}
+        <div
+          className="clients-slider-mobile"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          aria-label="Mobile Clients Grid"
+        >
+          <div
+            className="clients-slider-track"
+            style={{ transform: `translateX(-${mobileSlide * 100}%)` }}
+          >
+            {mobileSlides.map((slideClients, slideIdx) => (
+              <div className="clients-mobile-slide" key={slideIdx}>
+                <div className="clients-grid-mobile">
+                  {slideClients.map((client) => {
+                    const Logo = client.Component;
+                    return (
+                      <div className="client-card" key={client.id} title={client.name}>
+                        <Logo className="client-logo-svg" />
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile Carousel Pagination Dots (exactly 2 dots for 12 items) */}
+        {mobileSlides.length > 1 && (
+          <div className="clients-pagination clients-pagination-mobile" aria-label="Mobile pagination">
+            {mobileSlides.map((_, dotIndex) => (
+              <button
+                key={dotIndex}
+                type="button"
+                className={`clients-dot ${mobileSlide === dotIndex ? 'active' : ''}`}
+                onClick={() => setMobileSlide(dotIndex)}
+                aria-label={`View mobile slide ${dotIndex + 1}`}
+                aria-current={mobileSlide === dotIndex ? 'true' : 'false'}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
