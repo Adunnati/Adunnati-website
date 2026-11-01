@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowUpRight } from './icons/ArrowUpRight';
+// import { ArrowUpRight } from './icons/ArrowUpRight';
 
 // Vector icons matching the reference badges
 const BarChartIcon: React.FC = () => (
