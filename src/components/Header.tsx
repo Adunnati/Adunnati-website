@@ -36,15 +36,25 @@ export const Header: React.FC = () => {
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
-    closeMenu();
+    const wasOpen = isMenuOpen;
+    if (wasOpen) {
+      closeMenu();
+    }
 
-    // Reliable smooth scrolling across all mobile browsers
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      window.history.pushState(null, '', `#${targetId}`);
+    const scrollToTarget = () => {
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        window.history.pushState(null, '', `#${targetId}`);
+      } else {
+        window.location.hash = targetId;
+      }
+    };
+
+    if (wasOpen) {
+      setTimeout(scrollToTarget, 100);
     } else {
-      window.location.hash = targetId;
+      scrollToTarget();
     }
   };
 
@@ -64,10 +74,11 @@ export const Header: React.FC = () => {
 
       {/* Desktop Navigation (Visible on Desktop only) */}
       <nav className="desktop-nav" aria-label="Main navigation">
-        <a href="#services">EXPERTISE</a>
-        <a href="#work">WORK</a>
-        <a href="#about-us">ABOUT</a>
-        <a href="#lets-talk">CONTACT</a>
+        <a href="#services" onClick={(e) => handleNavClick(e, 'services')}>Expertise</a>
+        <a href="#why-adunnati" onClick={(e) => handleNavClick(e, 'why-adunnati')}>Approach</a>
+        <a href="#about-us" onClick={(e) => handleNavClick(e, 'about-us')}>About</a>
+        <a href="#partners" onClick={(e) => handleNavClick(e, 'partners')}>Partners</a>
+        <a href="#lets-talk" onClick={(e) => handleNavClick(e, 'lets-talk')}>Connect</a>
       </nav>
 
       {/* Mobile Menu Toggle (Three Lines at top right corner on mobile only) */}
@@ -90,7 +101,7 @@ export const Header: React.FC = () => {
         aria-hidden="true"
       />
 
-      {/* Mobile Dark Theme Sidebar Drawer */}
+      {/* Mobile Fullscreen Dark Theme Drawer */}
       <aside
         className={`mobile-drawer-sidebar${isMenuOpen ? ' open' : ''}`}
         aria-label="Mobile navigation"
@@ -114,7 +125,7 @@ export const Header: React.FC = () => {
             onClick={closeMenu}
             aria-label="Close navigation"
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
               <line x1="18" y1="6" x2="6" y2="18" />
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
@@ -124,21 +135,95 @@ export const Header: React.FC = () => {
         <div className="drawer-nav-container">
           <nav className="drawer-nav-list">
             <a href="#services" onClick={(e) => handleNavClick(e, 'services')} className="drawer-nav-link">
-              EXPERTISE
+              Expertise
             </a>
-            <a href="#work" onClick={(e) => handleNavClick(e, 'work')} className="drawer-nav-link">
-              WORK
+            <a href="#why-adunnati" onClick={(e) => handleNavClick(e, 'why-adunnati')} className="drawer-nav-link">
+              Approach
             </a>
-            {/* <a href="#why-adunnati" onClick={(e) => handleNavClick(e, 'why-adunnati')} className="drawer-nav-link">
-              Why Us
-            </a> */}
             <a href="#about-us" onClick={(e) => handleNavClick(e, 'about-us')} className="drawer-nav-link">
-              ABOUT
+              About
             </a>
-            <a href="#lets-talk" onClick={(e) => handleNavClick(e, 'lets-talk')} className="drawer-nav-link">
-              CONTACT
+            <a href="#partners" onClick={(e) => handleNavClick(e, 'partners')} className="drawer-nav-link">
+              Partners
+            </a>
+            <a href="#lets-talk" onClick={(e) => handleNavClick(e, 'lets-talk')} className="drawer-nav-link ">
+              Connect
             </a>
           </nav>
+
+          {/* Thin Divider Line matching reference image */}
+          <div className="drawer-divider" aria-hidden="true" />
+
+          {/* 5 Circular Social Media Buttons in separate window */}
+          <div className="drawer-social-row" aria-label="Social media links">
+            {/* LinkedIn */}
+            <a
+              href="https://www.linkedin.com/company/adunnati"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="drawer-social-btn"
+              aria-label="Adunnati on LinkedIn"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2z" />
+              </svg>
+            </a>
+
+            {/* Instagram */}
+            <a
+              href="https://www.instagram.com/adunnati/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="drawer-social-btn"
+              aria-label="Adunnati on Instagram"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" width="16" height="16">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+              </svg>
+            </a>
+
+            {/* Facebook */}
+            <a
+              href="https://www.facebook.com/adunnatidigital"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="drawer-social-btn"
+              aria-label="Adunnati on Facebook"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+              </svg>
+            </a>
+
+            {/* YouTube */}
+            <a
+              href="https://www.youtube.com/@adunnati"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="drawer-social-btn"
+              aria-label="Adunnati on YouTube"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" />
+                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="#000000" />
+              </svg>
+            </a>
+
+            {/* X */}
+            <a
+              href="https://x.com/adunnati"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="drawer-social-btn"
+              aria-label="Adunnati on X"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg>
+            </a>
+          </div>
         </div>
       </aside>
     </header>

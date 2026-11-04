@@ -19,9 +19,9 @@ export const App: React.FC = () => {
 
       <main>
         <Services />
-        <FeaturedWork />
         <WhyAdunnati />
         <About />
+        <FeaturedWork />
         <LetsTalk />
         {/* <Process /> */}
         {/* <Trust /> */}

@@ -6,13 +6,14 @@ export const About: React.FC = () => {
       <div className="container about-container">
         {/* Left Column: Narrative Content */}
         <div className="about-content">
-          <div className="eyebrow about-eyebrow">
-            <span>A LITTLE ABOUT US</span>
-           
+          <div className="about-eyebrow">
+            <span className="about-eyebrow-text">A LITTLE ABOUT US</span>
+            <span className="about-eyebrow-line" aria-hidden="true" />
           </div>
 
           <h2 className="about-heading">
-            Good Businesses Deserve Good Digital Thinking
+            Good Businesses Deserve<br />
+            <span className="about-heading-gold">Good Digital Thinking</span>
           </h2>
 
           <div className="about-narrative">
@@ -42,14 +43,17 @@ export const About: React.FC = () => {
 
         {/* Right Architectural 3D Scene - Immersive & Seamless */}
         <div className="about-stage-scene" aria-hidden="true">
-          <img
-            src="/assets/about-stage-pristine.png?v=20261024"
-            alt="Adunnati — Good Businesses Deserve Good Digital Thinking"
-            className="about-stage-img"
-            loading="lazy"
-            width="998"
-            height="1152"
-          />
+          <picture>
+            <source media="(max-width: 980px)" srcSet="/assets/about-stage-mobile.webp" />
+            <img
+              src="/assets/about-stage-desktop.webp"
+              alt="Adunnati — Good Businesses Deserve Good Digital Thinking"
+              className="about-stage-img"
+              loading="lazy"
+              width="1024"
+              height="973"
+            />
+          </picture>
         </div>
       </div>
     </section>

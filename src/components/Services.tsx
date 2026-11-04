@@ -2,20 +2,25 @@ import React from 'react';
 // import { ArrowUpRight } from './icons/ArrowUpRight';
 
 // Vector icons matching the reference badges
-const BarChartIcon: React.FC = () => (
-  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-    <rect x="2.5" y="11" width="3.5" height="6.5" rx="1" stroke="#BD8545" strokeWidth="1.6" />
-    <rect x="8.25" y="6.5" width="3.5" height="11" rx="1" stroke="#BD8545" strokeWidth="1.6" />
-    <rect x="14" y="2.5" width="3.5" height="15" rx="1" stroke="#BD8545" strokeWidth="1.6" />
+// Vector icons matching the reference badges
+const LaptopIcon: React.FC = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <rect x="3.5" y="4.5" width="17" height="11" rx="1.8" stroke="#BD8545" strokeWidth="1.8" />
+    <path
+      d="M1.5 19h21a0.8 0.8 0 0 0 .8-.8v-.2a0.8 0.8 0 0 0-.8-.8H1.5a0.8 0.8 0 0 0-.8.8v.2a0.8 0.8 0 0 0 .8.8z"
+      stroke="#BD8545"
+      strokeWidth="1.6"
+    />
+    <line x1="10" y1="16.5" x2="14" y2="16.5" stroke="#BD8545" strokeWidth="1.6" strokeLinecap="round" />
   </svg>
 );
 
 const PencilIcon: React.FC = () => (
-  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
     <path
       d="M14.1 2.9a2 2 0 0 1 2.8 2.8L6.2 16.4l-3.7.9.9-3.7L14.1 2.9z"
       stroke="#BD8545"
-      strokeWidth="1.6"
+      strokeWidth="1.7"
       strokeLinecap="round"
       strokeLinejoin="round"
     />
@@ -23,26 +28,26 @@ const PencilIcon: React.FC = () => (
 );
 
 const TargetIcon: React.FC = () => (
-  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-    <circle cx="10" cy="10" r="7.5" stroke="#BD8545" strokeWidth="1.6" />
-    <circle cx="10" cy="10" r="4.2" stroke="#BD8545" strokeWidth="1.6" />
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+    <circle cx="10" cy="10" r="7.5" stroke="#BD8545" strokeWidth="1.7" />
+    <circle cx="10" cy="10" r="4.2" stroke="#BD8545" strokeWidth="1.7" />
     <circle cx="10" cy="10" r="1.3" fill="#BD8545" />
   </svg>
 );
 
 const TrendIcon: React.FC = () => (
-  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
     <path
       d="M3 14.5l5-5 3.5 3.5L17 5.5"
       stroke="#BD8545"
-      strokeWidth="1.7"
+      strokeWidth="1.8"
       strokeLinecap="round"
       strokeLinejoin="round"
     />
     <path
       d="M12.5 5.5H17V10"
       stroke="#BD8545"
-      strokeWidth="1.7"
+      strokeWidth="1.8"
       strokeLinecap="round"
       strokeLinejoin="round"
     />
@@ -70,8 +75,8 @@ export interface ServiceCardItem {
 const servicesData: ServiceCardItem[] = [
   {
     number: '01',
-    badge: <BarChartIcon />,
-    titleLine1: 'Grow Your',
+    badge: <LaptopIcon />,
+    titleLine1: 'Build Your',
     titleLine2: 'Digital Presence',
     descBefore: 'Build a strong online presence that gets you noticed and brings the ',
     descUnderline: 'right customers',
@@ -83,8 +88,8 @@ const servicesData: ServiceCardItem[] = [
       { name: 'Social Media Management', link: '#contact' },
       { name: 'Branding', link: '#contact' },
     ],
-    sceneImg: '/assets/service-3d-1.webp',
-    sceneAlt: 'Laptop displaying growth bar chart on travertine stone with monstera plant',
+    sceneImg: '/assets/service-card-scene-1.webp',
+    sceneAlt: 'Laptop with your brand online on travertine stone with stacked website blocks and plant',
   },
   {
     number: '02',
@@ -101,8 +106,8 @@ const servicesData: ServiceCardItem[] = [
       { name: 'E-commerce Photoshoots', link: '#contact' },
       { name: 'Product Photography', link: '#contact' },
     ],
-    sceneImg: '/assets/service-3d-2.webp',
-    sceneAlt: 'Minimalist editorial frames and visual assets on textured stone slab',
+    sceneImg: '/assets/service-card-scene-2.webp',
+    sceneAlt: 'Laptop with video editing suite, camera, clapperboard and floating media icons',
   },
   {
     number: '03',
@@ -119,8 +124,8 @@ const servicesData: ServiceCardItem[] = [
       { name: 'E-commerce Sales', link: '#contact' },
       { name: 'Influencer Ads', link: '#contact' },
     ],
-    sceneImg: '/assets/service-3d-3.webp',
-    sceneAlt: 'Smartphone with performance marketing chart and floating 3D social icons on stone block',
+    sceneImg: '/assets/service-card-scene-3.webp',
+    sceneAlt: 'Target marketing laptop with floating Meta, Google and audience campaign icons',
   },
   {
     number: '04',
@@ -137,8 +142,8 @@ const servicesData: ServiceCardItem[] = [
       { name: 'Digital Expansion', link: '#contact' },
       { name: 'Strategy & Consultation', link: '#contact' },
     ],
-    sceneImg: '/assets/service-3d-4.webp',
-    sceneAlt: 'Rising golden growth curve with architectural bar pillars on travertine plinth',
+    sceneImg: '/assets/service-card-scene-4.webp',
+    sceneAlt: 'Analytics dashboard with glowing 3D rising growth bar chart and strategy target',
   },
 ];
 
@@ -146,7 +151,7 @@ export const Services: React.FC = () => {
   return (
     <section className="services-section" id="services">
       <div className="container services-container">
-        {/* Section Header */}
+        {/* Section Header (Desktop: Horizontal with vertical divider | Mobile: Clean stacked) */}
         <div className="services-intro">
           <div className="services-intro-left">
             <div className="services-eyebrow">
@@ -158,52 +163,26 @@ export const Services: React.FC = () => {
               Four Ways We Move<br />
               <span className="services-title-gold">Your Business Forward</span>
             </h2>
+          </div>
 
+          <div className="services-intro-right">
+            <div className="services-header-divider" aria-hidden="true" />
             <p className="services-subheading">
               Strategy, creative and performance, brought together to help you attract the right audience and turn opportunities into lasting growth.
             </p>
           </div>
-
-          <div className="services-intro-right">
-            {/* Decorative editorial curve in background */}
-            {/* <svg
-              className="services-deco-arc"
-              viewBox="0 0 220 120"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M10 120 C70 60 140 25 210 10"
-                stroke="url(#servicesArcGrad)"
-                strokeWidth="1.5"
-                strokeOpacity="0.45"
-              />
-              <circle cx="152" cy="36" r="4.5" fill="#B58245" />
-              <defs>
-                <linearGradient id="servicesArcGrad" x1="0" y1="1" x2="1" y2="0">
-                  <stop offset="0%" stopColor="#DFC8A0" stopOpacity="0.1" />
-                  <stop offset="100%" stopColor="#B58245" stopOpacity="0.8" />
-                </linearGradient>
-              </defs>
-            </svg> */}
-
-            {/* <a href="#contact" className="services-view-all-btn">
-              <span>View All Services</span>
-              <ArrowUpRight size={13} strokeWidth={2.4} className="services-arrow-icon" />
-            </a> */}
-          </div>
         </div>
 
-        {/* 2x2 Services Cards Grid (Razor-sharp native HTML text + individual clickable service links) */}
+        {/* 2x2 Services Cards Grid (Image 1 Luxury Reference Design) */}
         <div className="service-grid">
           {servicesData.map((item) => (
             <article
               key={item.number}
               className={`service-card service-card-${item.number}`}
             >
-              {/* Left Column: Razor-sharp Typography & Clickable Services List */}
-              <div className="service-card-left">
-                {/* Number & horizontal line */}
+              {/* Left / Top Text Content Layer */}
+              <div className="service-card-content">
+                {/* Number & horizontal gold line */}
                 <div className="service-card-num-row">
                   <span className="service-card-num">{item.number}</span>
                   <span className="service-card-num-line" aria-hidden="true" />
@@ -247,15 +226,15 @@ export const Services: React.FC = () => {
                 </ul>
               </div>
 
-              {/* Right Column: High-Res 3D Scene Seamlessly Integrated */}
-              <div className="service-card-right">
+              {/* Bottom-right 3D Scene Visual */}
+              <div className="service-card-visual" aria-hidden="true">
                 <img
                   src={item.sceneImg}
                   alt={item.sceneAlt}
-                  className="service-card-scene"
+                  className="service-card-visual-img"
                   loading="lazy"
-                  width="500"
-                  height="458"
+                  width="900"
+                  height="600"
                 />
               </div>
             </article>
@@ -267,3 +246,4 @@ export const Services: React.FC = () => {
 };
 
 export default Services;
+

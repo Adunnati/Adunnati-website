@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   BajajCapitalLogo,
   OrganicIndiaLogo,
@@ -35,7 +35,7 @@ const ALL_CLIENTS: ClientItem[] = [
   { id: 'reliance', name: 'Reliance', Component: RelianceLogo },
 ];
 
-const DESKTOP_PAGE_SIZE = 12;
+const DESKTOP_PAGE_SIZE = 6;
 const MOBILE_PAGE_SIZE = 6;
 
 // Helper to chunk array for responsive pages
@@ -55,12 +55,42 @@ export const FeaturedWork: React.FC = () => {
   // Active page state
   const [desktopSlide, setDesktopSlide] = useState(0);
   const [mobileSlide, setMobileSlide] = useState(0);
+  const [isDesktopHovered, setIsDesktopHovered] = useState(false);
+
+  // Automatic continuous horizontal scrolling for desktop
+  useEffect(() => {
+    if (isDesktopHovered || desktopSlides.length <= 1) return;
+
+    const timer = setInterval(() => {
+      setDesktopSlide((prev) => (prev + 1) % desktopSlides.length);
+    }, 3800);
+
+    return () => clearInterval(timer);
+  }, [isDesktopHovered, desktopSlides.length]);
+
+  // Automatic continuous horizontal scrolling for mobile
+  const [isMobileTouching, setIsMobileTouching] = useState(false);
+  const touchResumeTimeout = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (isMobileTouching || mobileSlides.length <= 1) return;
+
+    const timer = setInterval(() => {
+      setMobileSlide((prev) => (prev + 1) % mobileSlides.length);
+    }, 3800);
+
+    return () => clearInterval(timer);
+  }, [isMobileTouching, mobileSlides.length]);
 
   // Touch gesture support for mobile swiping
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
 
   const handleTouchStart = (e: React.TouchEvent) => {
+    setIsMobileTouching(true);
+    if (touchResumeTimeout.current) {
+      clearTimeout(touchResumeTimeout.current);
+    }
     touchStartX.current = e.targetTouches[0].clientX;
   };
 
@@ -69,23 +99,30 @@ export const FeaturedWork: React.FC = () => {
   };
 
   const handleTouchEnd = () => {
-    if (touchStartX.current === null || touchEndX.current === null) return;
-    const distance = touchStartX.current - touchEndX.current;
-    const isLeftSwipe = distance > 45;
-    const isRightSwipe = distance < -45;
+    if (touchStartX.current !== null && touchEndX.current !== null) {
+      const distance = touchStartX.current - touchEndX.current;
+      const isLeftSwipe = distance > 45;
+      const isRightSwipe = distance < -45;
 
-    if (isLeftSwipe && mobileSlide < mobileSlides.length - 1) {
-      setMobileSlide((prev) => prev + 1);
-    } else if (isRightSwipe && mobileSlide > 0) {
-      setMobileSlide((prev) => prev - 1);
+      if (isLeftSwipe) {
+        setMobileSlide((prev) => (prev + 1) % mobileSlides.length);
+      } else if (isRightSwipe) {
+        setMobileSlide((prev) => (prev - 1 + mobileSlides.length) % mobileSlides.length);
+      }
     }
 
     touchStartX.current = null;
     touchEndX.current = null;
+
+    // Resume continuous auto-scrolling 2.5s after user finishes touching
+    touchResumeTimeout.current = window.setTimeout(() => {
+      setIsMobileTouching(false);
+    }, 2500);
   };
 
   return (
-    <section className="clients-section" id="work">
+    <section className="clients-section" id="partners" style={{ position: 'relative' }}>
+      <span id="work" style={{ position: 'absolute', top: 0 }} aria-hidden="true" />
       <div className="container clients-container">
         {/* Header Block: Left title narrative + Right stat card */}
         <div className="clients-header">
@@ -136,7 +173,12 @@ export const FeaturedWork: React.FC = () => {
               })}
             </div>
           ) : (
-            <div className="clients-desktop-slider" aria-label="Clients Multi-Page Slider">
+            <div
+              className="clients-desktop-slider"
+              aria-label="Clients Multi-Page Slider"
+              onMouseEnter={() => setIsDesktopHovered(true)}
+              onMouseLeave={() => setIsDesktopHovered(false)}
+            >
               <div
                 className="clients-desktop-track"
                 style={{ transform: `translateX(-${desktopSlide * 100}%)` }}

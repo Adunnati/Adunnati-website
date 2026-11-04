@@ -306,26 +306,19 @@ export const LetsTalk: React.FC = () => {
                       />
                     </div>
 
-                    <div className="talk-input-field talk-input-field-company">
+                    <div className="talk-input-field">
                       <span className="talk-field-icon" aria-hidden="true">
                         <BuildingIcon size={19} color="#B58748" />
                       </span>
                       <input
                         type="text"
                         name="companyName"
-                        id="talk-company-name-input"
                         value={formData.companyName}
                         onChange={handleInputChange}
-                        placeholder=""
+                        placeholder="Company / Brand Name"
                         className="talk-input"
                         autoComplete="organization"
                       />
-                      {!formData.companyName && (
-                        <label htmlFor="talk-company-name-input" className="talk-stacked-placeholder" aria-hidden="true">
-                          <span className="talk-stacked-part">Company /</span>
-                          <span className="talk-stacked-part">Brand Name</span>
-                        </label>
-                      )}
                     </div>
                   </div>
 

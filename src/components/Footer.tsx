@@ -69,7 +69,7 @@ export const Footer: React.FC = () => {
             <div className="footer-social-row" aria-label="Social links">
               {/* LinkedIn */}
               <a
-                href="https://linkedin.com/"
+                href=" https://www.linkedin.com/company/adunnati"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="footer-social-btn"
@@ -82,7 +82,7 @@ export const Footer: React.FC = () => {
 
               {/* Instagram */}
               <a
-                href="https://instagram.com/"
+                href="https://www.instagram.com/adunnati/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="footer-social-btn"
@@ -97,7 +97,7 @@ export const Footer: React.FC = () => {
 
               {/* Facebook */}
               <a
-                href="https://facebook.com/"
+                href="https://www.facebook.com/adunnatidigital"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="footer-social-btn"
@@ -110,7 +110,7 @@ export const Footer: React.FC = () => {
 
               {/* YouTube */}
               <a
-                href="https://youtube.com/"
+                href="https://www.youtube.com/@adunnati"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="footer-social-btn"
@@ -124,7 +124,7 @@ export const Footer: React.FC = () => {
 
               {/* X */}
               <a
-                href="https://x.com/"
+                href="https://x.com/adunnati"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="footer-social-btn"

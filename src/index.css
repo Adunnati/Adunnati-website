@@ -125,7 +125,7 @@ button {
 }
 
 .logo-brand-name {
-    font-family: 'DM Sans', Manrope, sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 22px;
     font-weight: 700;
     letter-spacing: 0.14em;
@@ -148,10 +148,12 @@ button {
     display: flex;
     align-items: center;
     gap: 48px;
+    font-family: 'DM Sans', sans-serif;
 }
 
 .desktop-nav a {
-    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13.5px;
     text-transform: uppercase;
     letter-spacing: 0.12em;
     font-weight: 600;
@@ -604,15 +606,14 @@ footer {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    gap: 40px;
-    margin-bottom: 40px;
+    gap: 48px;
+    margin-bottom: 44px;
     position: relative;
     z-index: 2;
 }
 
 .services-intro-left {
-    flex: 1.2;
-    max-width: 660px;
+    flex-shrink: 0;
 }
 
 .services-eyebrow {
@@ -648,7 +649,7 @@ footer {
     letter-spacing: -0.025em;
     line-height: 1.08;
     color: #141312;
-    margin: 0 0 18px 0;
+    margin: 0;
     text-wrap: balance;
 }
 
@@ -661,25 +662,32 @@ footer {
     -webkit-text-fill-color: transparent;
 }
 
-.services-subheading {
-    font-family: 'Noto Serif', 'Noto Serif Fallback', Georgia, serif;
-    font-size: 20px;
-    font-weight: 500;
-    font-style: normal;
-    line-height: 1.55;
-    letter-spacing: -0.25px;
-    color: rgb(13, 13, 13);
-    max-width: 620px;
-    margin: 0;
-    text-wrap: pretty;
-}
-
 .services-intro-right {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    position: relative;
+    gap: 24px;
+    max-width: 460px;
     padding-bottom: 8px;
+}
+
+.services-header-divider {
+    width: 1.5px;
+    height: 58px;
+    background: #CDB086;
+    flex-shrink: 0;
+    border-radius: 1px;
+}
+
+.services-subheading {
+    font-family: 'Noto Serif', 'Noto Serif Fallback', Georgia, serif;
+    font-size: 15.5px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 1.6;
+    letter-spacing: -0.12px;
+    color: #171716;
+    margin: 0;
+    text-wrap: pretty;
 }
 
 .services-deco-arc {
@@ -800,81 +808,82 @@ footer {
 }
 
 /* ==========================================================================
-   2x2 Service Grid (Seamless Luxury Editorial Design)
+   2x2 Service Grid (Image 1 Luxury Editorial Reference Design)
    ========================================================================== */
 .service-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 22px;
+    gap: 24px;
     position: relative;
     z-index: 2;
 }
 
 .service-card {
-    background: linear-gradient(135deg, #FDFBF7 0%, #FAF6EE 100%);
-    border-radius: 18px;
-    border: 1px solid rgba(220, 212, 200, 0.7);
+    background: #FFFDFB;
+    border-radius: 24px;
+    border: 1px solid rgba(220, 212, 200, 0.75);
     box-shadow: 0 4px 20px rgba(24, 20, 16, 0.04), 0 1px 3px rgba(24, 20, 16, 0.02);
     position: relative;
     overflow: hidden;
-    min-height: 275px;
+    min-height: 510px;
     display: flex;
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 38px 30px 30px 38px;
 }
 
 .service-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 18px 40px -8px rgba(35, 25, 15, 0.1), 0 4px 12px rgba(35, 25, 15, 0.03);
-    border-color: rgba(189, 133, 69, 0.45);
+    transform: none;
+    box-shadow: 0 4px 20px rgba(24, 20, 16, 0.04), 0 1px 3px rgba(24, 20, 16, 0.02);
+    border-color: rgba(220, 212, 200, 0.75);
 }
 
-.service-card-left {
+.service-card-content {
     position: relative;
     z-index: 2;
-    flex: 1 1 54%;
-    max-width: 56%;
-    padding: 22px 14px 22px 24px;
     display: flex;
     flex-direction: column;
+    width: 100%;
+    max-width: 58%;
 }
 
 .service-card-num-row {
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 12px;
+    gap: 10px;
+    margin-bottom: 16px;
 }
 
 .service-card-num {
     font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 700;
     color: #BD8545;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.03em;
     line-height: 1;
 }
 
 .service-card-num-line {
-    width: 28px;
-    height: 1.5px;
-    background: #DFC49D;
+    width: 34px;
+    height: 1.8px;
+    background: #CDB086;
     border-radius: 1px;
 }
 
 .service-card-title-row {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 11px;
+    gap: 14px;
+    margin-bottom: 16px;
 }
 
 .service-card-badge {
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, #FFF6E8 0%, #FFEECD 100%);
-    border: 1px solid rgba(189, 133, 69, 0.28);
-    box-shadow: 0 2px 6px rgba(189, 133, 69, 0.08);
+    width: 50px;
+    height: 50px;
+    border-radius: 13px;
+    background: #FFF7EC;
+    border: 1.2px solid #F4E2C7;
+    box-shadow: 0 2px 8px rgba(189, 133, 69, 0.08);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -882,29 +891,32 @@ footer {
 }
 
 .service-card-title {
-    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 19px;
-    font-weight: 700;
-    color: #1A1714;
-    line-height: 1.18;
-    letter-spacing: -0.015em;
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    font-style: normal;
+    color: #141312;
+    line-height: 1.16;
+    letter-spacing: -0.025em;
     margin: 0;
 }
 
 .service-card-desc {
-    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 12.5px;
-    font-weight: 400;
-    color: #4B463E;
-    line-height: 1.48;
-    margin: 0 0 14px 0;
-    max-width: 96%;
+    font-family: 'Noto Serif', 'Noto Serif Fallback', Georgia, serif;
+    font-size: 14.5px;
+    font-weight: 500;
+    font-style: normal;
+    color: #171716;
+    line-height: 1.6;
+    letter-spacing: -0.12px;
+    margin: 0 0 24px 0;
+    max-width: 95%;
 }
 
 .service-card-desc u {
     text-decoration: underline;
-    text-decoration-color: rgba(30, 25, 20, 0.45);
-    text-underline-offset: 2.5px;
+    text-decoration-color: rgba(189, 133, 69, 0.45);
+    text-underline-offset: 3px;
 }
 
 .service-bullets-list {
@@ -913,19 +925,19 @@ footer {
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 5.5px;
+    gap: 10px;
 }
 
 .service-bullet-link {
     display: inline-flex;
     align-items: center;
-    gap: 7px;
-    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 13px;
+    gap: 8px;
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 14.5px;
     font-weight: 500;
-    color: #2D2721;
+    color: #141312;
     text-decoration: none;
-    line-height: 1.35;
+    line-height: 1.4;
     transition: color 0.2s ease;
     cursor: pointer;
     width: fit-content;
@@ -933,7 +945,7 @@ footer {
 
 .service-bullet-arrow {
     display: inline-block;
-    font-size: 12px;
+    font-size: 13.5px;
     font-weight: 600;
     color: #BD8545;
     line-height: 1;
@@ -949,7 +961,7 @@ footer {
 }
 
 .service-bullet-link:hover .service-bullet-arrow {
-    transform: translate(2px, -2px);
+    transform: translate(2.5px, -2.5px);
     color: #8F5C1B;
 }
 
@@ -959,28 +971,31 @@ footer {
     border-radius: 2px;
 }
 
-.service-card-right {
+.service-card-visual {
     position: absolute;
     right: 0;
-    top: 0;
     bottom: 0;
-    width: 50%;
+    width: 62%;
+    height: 60%;
     z-index: 1;
     pointer-events: none;
     overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
 }
 
-.service-card-scene {
+.service-card-visual-img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: right bottom;
     display: block;
     transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.service-card:hover .service-card-scene {
-    transform: scale(1.025);
+.service-card:hover .service-card-visual-img {
+    transform: none;
 }
 
 /* ==========================================================================
@@ -1151,7 +1166,7 @@ footer {
 .clients-desktop-track {
     display: flex;
     width: 100%;
-    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1);
     will-change: transform;
 }
 
@@ -1165,8 +1180,7 @@ footer {
 .clients-grid-desktop {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 16px;
+    gap: 18px;
 }
 
 /* Individual Client Card: optimized for spacious, prominent brand display */
@@ -1175,11 +1189,11 @@ footer {
     border: 1px solid #ECE6DC;
     border-radius: 14px;
     box-shadow: 0 4px 18px rgba(24, 20, 16, 0.03);
-    height: 108px;
+    height: 116px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px 14px;
+    padding: 12px 18px;
     box-sizing: border-box;
     transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
 }
@@ -1194,7 +1208,7 @@ footer {
     width: 100%;
     height: 100%;
     max-width: 90%;
-    max-height: 64px;
+    max-height: 68px;
     display: block;
     object-fit: contain;
     transition: transform 0.25s ease;
@@ -1261,7 +1275,7 @@ footer {
 
 @media (max-width: 768px) {
     .clients-section {
-        padding: 52px 0 56px;
+        padding: 56px 0;
     }
 
     .clients-header {
@@ -1383,7 +1397,15 @@ footer {
 }
 
 .why-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 48px;
     margin-bottom: 44px;
+}
+
+.why-header-left {
+    flex-shrink: 0;
 }
 
 .why-eyebrow {
@@ -1419,7 +1441,7 @@ footer {
     letter-spacing: -0.025em;
     text-transform: none;
     color: #141312;
-    margin: 0 0 20px 0;
+    margin: 0;
     text-wrap: balance;
 }
 
@@ -1432,21 +1454,38 @@ footer {
     -webkit-text-fill-color: transparent;
 }
 
+.why-header-right {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    max-width: 480px;
+    padding-bottom: 4px;
+}
+
+.why-header-divider {
+    width: 1.5px;
+    height: 72px;
+    background: #CDB086;
+    flex-shrink: 0;
+    border-radius: 1px;
+    margin-top: 4px;
+}
+
 .why-subheading-wrap {
-    max-width: 660px;
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
 }
 
 .why-subheading {
     font-family: 'Noto Serif', 'Noto Serif Fallback', Georgia, serif;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 500;
     font-style: normal;
     line-height: 1.55;
-    letter-spacing: -0.25px;
-    color: rgb(13, 13, 13);
+    letter-spacing: -0.15px;
+    color: #171716;
     margin: 0;
     text-wrap: pretty;
 }
@@ -1536,15 +1575,25 @@ footer {
 .about-eyebrow {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 14px;
+    gap: 14px;
+    margin-bottom: 16px;
+}
+
+.about-eyebrow-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #AA7E48;
 }
 
 .about-eyebrow-line {
     display: inline-block;
-    width: 34px;
-    height: 1px;
-    background: #C59B27;
+    width: 44px;
+    height: 1.5px;
+    background: #CDB086;
+    border-radius: 1px;
 }
 
 .about-heading {
@@ -1558,6 +1607,16 @@ footer {
     color: #141312;
     margin: 0 0 20px 0;
     text-wrap: balance;
+}
+
+.about-heading-gold {
+    font-family: inherit;
+    font-weight: inherit;
+    color: #B58245;
+    background: linear-gradient(135deg, #BD8545 0%, #A36F35 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
 }
 
 .about-narrative {
@@ -1630,6 +1689,14 @@ footer {
     justify-content: flex-end;
     pointer-events: none;
     z-index: 1;
+}
+
+.about-stage-scene picture {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: flex-end;
 }
 
 .about-stage-img {
@@ -1882,8 +1949,8 @@ footer {
     background: #FFFFFF;
     border: 1.2px solid #E2D6C6;
     border-radius: 12px;
-    padding: 0 14px;
-    min-height: 48px;
+    padding: 0 16px;
+    min-height: 52px;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -1906,36 +1973,21 @@ footer {
     background: transparent;
     outline: none;
     font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 13.5px;
+    font-size: 15.5px;
     font-weight: 500;
-    color: #1F1D1A;
+    color: #1A1916;
     padding: 10px 0;
 }
 
 .talk-input::placeholder {
-    color: #6C6861;
+    color: #555047;
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 15px;
     font-weight: 400;
-}
-
-/* Stacked / Adaptive Placeholder for Company / Brand Name */
-.talk-input-field-company {
-    position: relative;
-}
-
-.talk-stacked-placeholder {
-    position: absolute;
-    left: 45px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    pointer-events: none;
-    color: #6C6861;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13.5px;
-    font-weight: 400;
-    user-select: none;
+    font-style: normal;
+    letter-spacing: -0.01em;
+    opacity: 1;
+    -webkit-text-fill-color: #555047;
 }
 
 /* Custom Dropdown Select */
@@ -1946,8 +1998,8 @@ footer {
     background: #FFFFFF;
     border: 1.2px solid #E2D6C6;
     border-radius: 12px;
-    padding: 8px 14px;
-    min-height: 52px;
+    padding: 9px 16px;
+    min-height: 56px;
     cursor: pointer;
     user-select: none;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -1971,7 +2023,7 @@ footer {
 
 .talk-select-label {
     font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 13px;
+    font-size: 14.5px;
     font-weight: 600;
     color: #1A1916;
     line-height: 1.25;
@@ -1979,13 +2031,14 @@ footer {
 
 .talk-select-value {
     font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 12.5px;
-    line-height: 1.2;
+    font-size: 14px;
+    line-height: 1.25;
     margin-top: 3px;
 }
 
 .talk-select-value.is-placeholder {
-    color: #7A7670;
+    color: #555047;
+    font-weight: 400;
 }
 
 .talk-select-value.has-value {
@@ -2027,10 +2080,10 @@ footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 9px 12px;
+    padding: 10px 14px;
     border-radius: 8px;
     font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 13px;
+    font-size: 14px;
     color: #2A2825;
     cursor: pointer;
     transition: background 0.15s ease, color 0.15s ease;
@@ -2055,8 +2108,8 @@ footer {
     background: #FFFFFF;
     border: 1.2px solid #E2D6C6;
     border-radius: 12px;
-    padding: 12px 14px;
-    min-height: 90px;
+    padding: 14px 16px;
+    min-height: 96px;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -2076,15 +2129,21 @@ footer {
     outline: none;
     resize: vertical;
     font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 13.5px;
+    font-size: 15.5px;
     color: #1F1D1A;
     min-height: 70px;
     line-height: 1.45;
 }
 
 .talk-textarea::placeholder {
-    color: #6C6861;
+    color: #555047;
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 15px;
     font-weight: 400;
+    font-style: normal;
+    letter-spacing: -0.01em;
+    opacity: 1;
+    -webkit-text-fill-color: #555047;
 }
 
 /* Submit Button */
@@ -2218,7 +2277,7 @@ footer {
    ========================================================================== */
 @media (max-width: 960px) {
     .talk-section {
-        padding: 55px 0 75px;
+        padding: 56px 0;
     }
 
     .talk-layout-grid {
@@ -2242,43 +2301,9 @@ footer {
         margin-bottom: 26px;
     }
 
-    /* Badges in horizontal 3-column row on mobile/tablet (Image 2) */
+    /* Hide the three points with logos on mobile only (Desktop remains untouched) */
     .talk-badges-container {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 0;
-        margin-bottom: 8px;
-    }
-
-    .talk-badge-item {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 12px;
-        padding: 0 6px;
-        position: relative;
-    }
-
-    /* Subtle vertical divider lines between columns 1-2 and 2-3 (Image 2) */
-    .talk-badge-item:not(:last-child)::after {
-        content: '';
-        position: absolute;
-        right: 0;
-        top: 10%;
-        bottom: 10%;
-        width: 1px;
-        background: rgba(200, 175, 145, 0.4);
-    }
-
-    .talk-badge-icon-box {
-        width: 50px;
-        height: 50px;
-    }
-
-    .talk-badge-text {
-        align-items: center;
-        font-size: 12.5px;
-        line-height: 1.25;
+        display: none !important;
     }
 
     /* Form card with crisp outline on mobile */
@@ -2298,15 +2323,15 @@ footer {
         margin-bottom: 18px;
     }
 
-    /* 2-Column layout PRESERVED on mobile matching Image 2! */
+    /* Single-column layout on mobile: all 7 fields shown in separate lines */
     .talk-form-row-2col {
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
+        grid-template-columns: 1fr;
+        gap: 12px;
     }
 
     .talk-input-field {
-        min-height: 45px;
-        padding: 0 10px;
+        min-height: 48px;
+        padding: 0 12px;
         border: 1.2px solid #E2D6C6;
         border-radius: 11px;
     }
@@ -2316,56 +2341,53 @@ footer {
     }
 
     .talk-field-icon svg {
-        width: 17px;
-        height: 17px;
+        width: 18px;
+        height: 18px;
     }
 
     .talk-input {
-        font-size: 12px;
+        font-size: 15px;
     }
 
     .talk-input::placeholder {
-        font-size: 12px;
-    }
-
-    /* 2-line stacked label for Company / Brand Name on mobile (Image 2) */
-    .talk-stacked-placeholder {
-        left: 35px;
-        display: flex;
-        flex-direction: column;
-        line-height: 1.15;
-        font-size: 11px;
+        font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 14.5px;
+        color: #555047;
+        opacity: 1;
+        -webkit-text-fill-color: #555047;
     }
 
     .talk-select-field {
-        min-height: 48px;
-        padding: 7px 12px;
+        min-height: 52px;
+        padding: 8px 12px;
         border: 1.2px solid #E2D6C6;
         border-radius: 11px;
     }
 
     .talk-select-label {
-        font-size: 12px;
+        font-size: 13.5px;
     }
 
     .talk-select-value {
-        font-size: 11px;
+        font-size: 13px;
     }
 
     .talk-textarea-field {
-        min-height: 75px;
-        padding: 10px 12px;
+        min-height: 85px;
+        padding: 12px 14px;
         border: 1.2px solid #E2D6C6;
         border-radius: 11px;
     }
 
     .talk-textarea {
-        font-size: 12px;
-        min-height: 55px;
+        font-size: 15px;
+        min-height: 60px;
     }
 
     .talk-textarea::placeholder {
-        font-size: 12px;
+        font-size: 14.5px;
+        color: #555047;
+        opacity: 1;
     }
 
     .talk-submit-btn {
@@ -2382,11 +2404,11 @@ footer {
 
 @media (max-width: 480px) {
     .talk-section {
-        padding: 44px 0 60px;
+        padding: 44px 0;
     }
 
     .talk-container {
-        width: min(92%, 1240px);
+        width: min(90%, 1240px);
     }
 
     .talk-heading {
@@ -2398,15 +2420,6 @@ footer {
     .talk-subheading {
         font-size: 14px;
         line-height: 1.55;
-    }
-
-    .talk-badge-icon-box {
-        width: 46px;
-        height: 46px;
-    }
-
-    .talk-badge-text {
-        font-size: 11.5px;
     }
 
     .talk-form-card {
@@ -2425,69 +2438,78 @@ footer {
         margin-bottom: 16px;
     }
 
+    /* All fields in single separate lines on mobile */
     .talk-form-row-2col {
-        grid-template-columns: 1fr 1fr;
-        gap: 6px;
+        grid-template-columns: 1fr;
+        gap: 10px;
     }
 
     .talk-input-field {
-        min-height: 44px;
-        padding: 0 8px;
+        min-height: 48px;
+        padding: 0 10px;
         border: 1.2px solid #E2D6C6;
         border-radius: 10px;
     }
 
     .talk-field-icon {
-        margin-right: 6px;
+        margin-right: 8px;
     }
 
     .talk-field-icon svg {
-        width: 16px;
-        height: 16px;
+        width: 17px;
+        height: 17px;
     }
 
     .talk-input {
-        font-size: 11.5px;
+        font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 14.5px;
+        color: #1A1916;
     }
 
     .talk-input::placeholder {
-        font-size: 11.5px;
-    }
-
-    .talk-stacked-placeholder {
-        left: 30px;
-        font-size: 10.5px;
-        line-height: 1.12;
+        font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 14px;
+        color: #555047;
+        opacity: 1;
+        -webkit-text-fill-color: #555047;
     }
 
     .talk-select-field {
-        min-height: 46px;
-        padding: 6px 10px;
+        min-height: 50px;
+        padding: 7px 11px;
         border: 1.2px solid #E2D6C6;
         border-radius: 10px;
     }
 
     .talk-select-label {
-        font-size: 11.5px;
+        font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 13.5px;
+        color: #555047;
     }
 
     .talk-select-value {
-        font-size: 10.5px;
+        font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 13px;
     }
 
     .talk-textarea-field {
-        min-height: 70px;
-        padding: 8px 10px;
+        min-height: 78px;
+        padding: 10px 11px;
         border: 1.2px solid #E2D6C6;
         border-radius: 10px;
     }
 
     .talk-textarea {
-        font-size: 11.5px;
+        font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 14.5px;
+        color: #1A1916;
     }
 
     .talk-textarea::placeholder {
-        font-size: 11.5px;
+        font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-size: 14px;
+        color: #555047;
+        opacity: 0.95;
     }
 
     .talk-submit-btn {
@@ -3362,15 +3384,23 @@ footer {
         top: auto;
         bottom: auto;
         width: 100%;
-        max-width: 540px;
+        max-width: 520px;
         height: auto;
-        margin: 0 auto;
+        margin: 24px auto 0;
+        justify-content: center;
+        display: flex;
+    }
+
+    .about-stage-scene picture {
+        width: 100%;
+        height: auto;
         justify-content: center;
     }
 
     .about-stage-img {
+        width: 100%;
         height: auto;
-        max-height: 440px;
+        max-height: 480px;
         object-fit: contain;
     }
 }
@@ -3522,24 +3552,27 @@ footer {
     .mobile-drawer-sidebar {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: flex-start;
         position: fixed;
         top: 0;
+        left: auto;
         right: 0;
         bottom: 0;
-        width: min(86vw, 380px);
+        width: 55vw;
+        min-width: 270px;
+        max-width: 85vw;
         height: 100vh;
         height: 100dvh;
-        background: radial-gradient(circle at 90% 12%, rgba(212, 175, 114, 0.12) 0%, rgba(28, 26, 24, 0.6) 40%, rgba(18, 17, 16, 0.98) 75%), #121110;
-        border-left: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: -15px 0 45px rgba(0, 0, 0, 0.6), -4px 0 16px rgba(0, 0, 0, 0.4);
+        background: #000000;
+        border-left: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: -15px 0 45px rgba(0, 0, 0, 0.75);
         z-index: 999;
-        padding: 24px 22px 28px;
+        padding: 22px 18px 28px;
         box-sizing: border-box;
         transform: translateX(100%);
         visibility: hidden;
         pointer-events: none;
-        transition: transform 0.36s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.36s ease;
+        transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.32s ease;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
     }
@@ -3550,23 +3583,23 @@ footer {
         pointer-events: auto;
     }
 
-    /* Drawer Header */
+    /* Drawer Header matching screenshot */
     .drawer-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding-bottom: 20px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding-bottom: 18px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
     }
 
     .drawer-brand {
         display: inline-flex;
         align-items: center;
-        gap: 12px;
+        gap: 10px;
     }
 
     .drawer-logo-mark {
-        height: 34px;
+        height: 32px;
         width: auto;
         object-fit: contain;
     }
@@ -3578,20 +3611,20 @@ footer {
     }
 
     .drawer-brand-name {
-        font-family: 'DM Sans', Manrope, sans-serif;
-        font-size: 17px;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 16px;
         font-weight: 700;
-        letter-spacing: 0.14em;
-        color: #F6F3EE;
+        letter-spacing: 0.12em;
+        color: #FFFFFF;
         line-height: 1;
     }
 
     .drawer-tagline {
         font-family: 'DM Sans', sans-serif;
-        font-size: 7px;
+        font-size: 6.5px;
         font-weight: 700;
-        letter-spacing: 0.28em;
-        color: #C59B27;
+        letter-spacing: 0.22em;
+        color: #CBA558;
         text-transform: uppercase;
         line-height: 1;
     }
@@ -3601,7 +3634,7 @@ footer {
         height: 36px;
         background: transparent;
         border: none;
-        color: #F6F3EE;
+        color: #FFFFFF;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -3612,15 +3645,15 @@ footer {
 
     .drawer-close-btn:hover,
     .drawer-close-btn:active {
-        color: #D4AF72;
-        transform: rotate(90deg);
-        opacity: 0.9;
+        color: #E2C082;
+        transform: scale(1.08);
+        opacity: 0.95;
     }
 
-    /* Drawer Navigation (Top-aligned, simple written links) */
+    /* Drawer Navigation List matching screenshot */
     .drawer-nav-container {
         flex-grow: 1;
-        padding: 36px 8px 24px;
+        padding: 26px 0 20px;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -3629,26 +3662,79 @@ footer {
     .drawer-nav-list {
         display: flex;
         flex-direction: column;
-        gap: 22px;
+        gap: 20px;
     }
 
     .drawer-nav-link {
-        font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-family: 'DM Sans', sans-serif;
         font-size: 22px;
-        font-weight: 500;
-        letter-spacing: -0.025em;
+        font-weight: 600;
+        letter-spacing: -0.015em;
         line-height: 1.15;
-        color: #F6F3EE;
+        color: #FFFFFF;
         text-decoration: none;
         display: block;
         width: fit-content;
-        transition: color 0.22s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: color 0.22s ease, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .drawer-nav-link:hover,
     .drawer-nav-link:active {
-        color: #D4AF72;
-        transform: translateX(8px);
+        color: #E2C082;
+        transform: translateX(6px);
+    }
+
+    /* Highlighted 'Connect' in warm gold matching reference image */
+    .drawer-nav-link.drawer-nav-link-connect {
+        color: #E2C082;
+    }
+
+    .drawer-nav-link.drawer-nav-link-connect:hover {
+        color: #F1D49D;
+    }
+
+    /* Horizontal divider line */
+    .drawer-divider {
+        width: 100%;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.14);
+        margin: 24px 0 20px;
+    }
+
+    /* Circular Social Media Buttons Row */
+    .drawer-social-row {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        flex-wrap: wrap;
+    }
+
+    .drawer-social-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1.2px solid rgba(255, 255, 255, 0.85);
+        background: transparent;
+        color: #FFFFFF;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: border-color 0.2s ease, transform 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .drawer-social-btn:hover,
+    .drawer-social-btn:active {
+        border-color: #E2C082;
+        color: #E2C082;
+        transform: translateY(-2px);
+        background: rgba(226, 192, 130, 0.1);
+    }
+
+    .drawer-social-btn svg {
+        display: block;
+        width: 16px;
+        height: 16px;
     }
 
     .logo {
@@ -3829,9 +3915,26 @@ footer {
     .work-section,
     .why-section,
     .about-section,
-    .process-section {
-        padding: 56px 0;
-        margin: 0;
+    .process-section,
+    .clients-section,
+    .talk-section {
+        padding: 56px 0 !important;
+        margin: 0 !important;
+    }
+
+    .container,
+    .services-container,
+    .why-container,
+    .about-container,
+    .clients-container,
+    .talk-container,
+    .footer-container,
+    .site-header,
+    .hero-content-stage {
+        width: min(92%, 1360px) !important;
+        max-width: 1360px !important;
+        margin-inline: auto !important;
+        box-sizing: border-box !important;
     }
 
     .services-section:before {
@@ -3847,6 +3950,11 @@ footer {
         align-items: flex-start;
         flex-direction: column;
         gap: 0;
+    }
+
+    .services-header-divider,
+    .why-header-divider {
+        display: none !important;
     }
 
     .services-intro {
@@ -3904,58 +4012,105 @@ footer {
     }
 
     .service-card {
-        border-radius: 16px;
-        min-height: 240px;
+        border-radius: 20px;
+        min-height: 480px;
         max-width: 100%;
         margin-inline: 0;
         width: 100%;
         overflow: hidden;
-        border: 1px solid rgba(220, 212, 200, 0.7);
+        border: 1px solid rgba(220, 212, 200, 0.75);
         box-shadow: 0 4px 18px rgba(24, 20, 16, 0.05);
+        background: #FFFDFB;
+        position: relative;
+        padding: 28px 22px 24px 24px;
+        display: flex;
+        flex-direction: column;
     }
 
-    .service-card-left {
-        max-width: 62%;
-        flex: 1 1 62%;
-        padding: 18px 12px 18px 18px;
+    .service-card-content {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 68%;
+        padding: 0;
+        background: transparent;
     }
 
-    .service-card-right {
-        width: 44%;
+    .service-card-title-row {
+        gap: 12px;
+        margin-bottom: 14px;
     }
 
     .service-card-title {
-        font-size: 16.5px;
+        font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 20px;
+        font-weight: 500;
+        font-style: normal;
+        color: #141312;
+        line-height: 1.18;
     }
 
     .service-card-badge {
-        width: 32px;
-        height: 32px;
-        border-radius: 8px;
+        width: 44px;
+        height: 44px;
+        border-radius: 11px;
     }
 
     .service-card-badge svg {
-        width: 15px;
-        height: 15px;
+        width: 18px;
+        height: 18px;
     }
 
     .service-card-desc {
-        font-size: 11.5px;
-        line-height: 1.4;
-        margin-bottom: 10px;
+        font-family: 'Noto Serif', 'Noto Serif Fallback', Georgia, serif;
+        font-size: 13.5px;
+        font-weight: 500;
+        font-style: normal;
+        color: #171716;
+        line-height: 1.55;
+        letter-spacing: -0.1px;
+        margin-bottom: 16px;
+        max-width: 98%;
     }
 
     .service-bullets-list {
-        gap: 4px;
+        gap: 8px;
     }
 
     .service-bullet-link {
-        font-size: 12px;
+        font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 13.5px;
+        font-weight: 500;
+        color: #141312;
+        gap: 7px;
     }
 
     .service-bullet-arrow {
-        font-size: 10.5px;
+        font-size: 12px;
     }
+
+    .service-card-visual {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 68%;
+        height: 230px;
+        z-index: 1;
+        pointer-events: none;
+        overflow: hidden;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+    }
+
+    .service-card-visual-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: right bottom;
+        display: block;
+    }
+
 
 
 
@@ -4043,14 +4198,36 @@ footer {
     }
 
     .why-section {
-        padding: 52px 0 56px;
+        padding: 56px 0;
     }
 
     .why-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
         margin-bottom: 28px;
     }
 
-    .why-eyebrow {
+    .why-header-left {
+        max-width: 100%;
+        flex: none;
+    }
+
+    .why-header-right {
+        max-width: 100%;
+        flex: none;
+        width: 100%;
+    }
+
+    .why-subheading-wrap {
+        max-width: 100%;
+        flex: none;
+        padding-bottom: 0;
+        gap: 12px;
+    }
+
+    .why-eyebrow,
+    .about-eyebrow {
         gap: 12px;
         margin-bottom: 14px;
     }
@@ -4102,7 +4279,7 @@ footer {
     }
 
     .about-section {
-        padding: 56px 0 65px;
+        padding: 56px 0;
     }
 
     .about-container {
@@ -4157,8 +4334,19 @@ footer {
 }
 
 @media(max-width:480px) {
-    .container {
-        width: 90%;
+    .container,
+    .services-container,
+    .why-container,
+    .about-container,
+    .clients-container,
+    .talk-container,
+    .footer-container,
+    .site-header,
+    .hero-content-stage {
+        width: min(90%, 1360px) !important;
+        max-width: 1360px !important;
+        margin-inline: auto !important;
+        box-sizing: border-box !important;
     }
 
     .hero-flat-section,
@@ -4250,9 +4438,11 @@ footer {
     .work-section,
     .why-section,
     .about-section,
-    .process-section {
-        padding: 44px 0;
-        margin: 0;
+    .process-section,
+    .clients-section,
+    .talk-section {
+        padding: 44px 0 !important;
+        margin: 0 !important;
     }
 
     .services-section:before {

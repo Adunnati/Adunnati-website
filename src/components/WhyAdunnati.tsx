@@ -40,25 +40,31 @@ export const WhyAdunnati: React.FC = () => {
   return (
     <section className="why-section" id="why-adunnati">
       <div className="container why-container">
-        {/* Header Block: Eyebrow + Headline + Narrative */}
+        {/* Header Block: Eyebrow + Headline + Divider + Narrative (Desktop: side-by-side | Mobile: clean stacked) */}
         <div className="why-header">
-          <div className="why-eyebrow">
-            <span className="why-eyebrow-text">WHY ADUNNATI</span>
-            <span className="why-eyebrow-line" aria-hidden="true" />
+          <div className="why-header-left">
+            <div className="why-eyebrow">
+              <span className="why-eyebrow-text">WHY ADUNNATI</span>
+              <span className="why-eyebrow-line" aria-hidden="true" />
+            </div>
+
+            <h2 className="why-heading">
+              Thoughtful Strategy<br />
+              <span className="why-heading-gold">Work That Means Business</span>
+            </h2>
           </div>
 
-          <h2 className="why-heading">
-            Thoughtful Strategy<br />
-            <span className="why-heading-gold">Work That Means Business</span>
-          </h2>
+          <div className="why-header-right">
+            <div className="why-header-divider" aria-hidden="true" />
 
-          <div className="why-subheading-wrap">
-            <p className="why-subheading">
-              We believe good marketing starts with understanding the business behind it.
-            </p>
-            <p className="why-subheading">
-              The goals, the customer, the offer and the numbers all matter. We bring these pieces together to build a clear direction, execute with intent and keep improving based on what the work tells us.
-            </p>
+            <div className="why-subheading-wrap">
+              <p className="why-subheading">
+                We believe good marketing starts with understanding the business behind it.
+              </p>
+              <p className="why-subheading">
+                The goals, the customer, the offer and the numbers all matter. We bring these pieces together to build a clear direction, execute with intent and keep improving based on what the work tells us.
+              </p>
+            </div>
           </div>
         </div>
 
