@@ -1,13 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import {
-  BajajCapitalLogo,
-  OrganicIndiaLogo,
-  ExideCareLogo,
-  MTRLogo,
-  KanInfratechLogo,
-  JaroEducationLogo,
-} from './icons/ClientLogos';
-
 interface ClientItem {
   id: string;
   name: string;
