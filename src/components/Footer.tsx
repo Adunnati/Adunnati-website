@@ -1,6 +1,52 @@
 import React, { useState } from 'react';
 
+interface FooterLinkItem {
+  label: string;
+  href?: string;
+}
+
 const CURRENT_YEAR = new Date().getFullYear();
+
+const OUR_SERVICE_LINKS: FooterLinkItem[] = [
+  { label: 'Websites' },
+  { label: 'Landing Pages' },
+  { label: 'Shopify Stores' },
+  { label: 'Social Media Management' },
+  { label: 'Branding' },
+  { label: 'Static Creatives' },
+  { label: 'Video Creatives' },
+  { label: 'Reels & Short Videos' },
+  { label: 'E-commerce Photoshoots' },
+  { label: 'Product Photography' },
+];
+
+const GROWTH_SERVICE_LINKS: FooterLinkItem[] = [
+  { label: 'Meta Ads' },
+  { label: 'Google Ads' },
+  { label: 'Lead Generation' },
+  { label: 'E-commerce Sales' },
+  { label: 'Influencer Ads' },
+  { label: 'Ad Account Audits' },
+  { label: 'Conversion Optimisation' },
+  { label: 'ROAS Improvement' },
+  { label: 'Strategy & Consultation' },
+  { label: 'Digital Expansion' },
+];
+
+const renderFooterLinkList = (items: FooterLinkItem[]) => (
+  <ul className="footer-links-list">
+    {items.map((item) => (
+      <li key={item.label}>
+        <a
+          href={item.href || undefined}
+          onClick={item.href ? undefined : (e) => e.preventDefault()}
+        >
+          {item.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+);
 
 export const Footer: React.FC = () => {
   // Mobile accordion state for collapsible sections
@@ -149,10 +195,11 @@ export const Footer: React.FC = () => {
             </div>
 
             <ul className="footer-links-list">
-              <li><a href="#about-us">About</a></li>
-              <li><a href="#work">Our Work</a></li>
               <li><a href="#services">Expertise</a></li>
-              <li><a href="#lets-talk">Contact</a></li>
+              <li><a href="#why-adunnati">Approach</a></li>
+              <li><a href="#about-us">About</a></li>
+              <li><a href="#partners">Partners</a></li>
+              <li><a href="#lets-talk">Connect</a></li>
               <li><a href="#privacy">Privacy Policy</a></li>
               <li><a href="#terms">Terms & Conditions</a></li>
             </ul>
@@ -168,18 +215,7 @@ export const Footer: React.FC = () => {
               </span>
             </div>
 
-            <ul className="footer-links-list">
-              <li><a href="#services">Websites</a></li>
-              <li><a href="#services">Landing Pages</a></li>
-              <li><a href="#services">Shopify Stores</a></li>
-              <li><a href="#services">Social Media Management</a></li>
-              <li><a href="#services">Branding</a></li>
-              <li><a href="#services">Static Ads</a></li>
-              <li><a href="#services">Video Ads</a></li>
-              <li><a href="#services">Reels & Short Videos</a></li>
-              <li><a href="#services">E-commerce Photoshoots</a></li>
-              <li><a href="#services">Product Photography</a></li>
-            </ul>
+            {renderFooterLinkList(OUR_SERVICE_LINKS)}
           </div>
 
           {/* Column 4: Growth Services */}
@@ -192,17 +228,7 @@ export const Footer: React.FC = () => {
               </span>
             </div>
 
-            <ul className="footer-links-list">
-              <li><a href="#services">Meta Ads</a></li>
-              <li><a href="#services">Google Ads</a></li>
-              <li><a href="#services">Lead Generation</a></li>
-              <li><a href="#services">E-commerce Sales</a></li>
-              <li><a href="#services">Influencer Ads</a></li>
-              <li><a href="#services">Ad Account Audits</a></li>
-              <li><a href="#services">Conversion Optimisation</a></li>
-              <li><a href="#services">ROAS Improvement</a></li>
-              <li><a href="#services">Digital Expansion</a></li>
-            </ul>
+            {renderFooterLinkList(GROWTH_SERVICE_LINKS)}
           </div>
         </div>
 
@@ -217,13 +243,7 @@ export const Footer: React.FC = () => {
             </p>
 
             {/* Mobile-Only Vertical Divider and Legal Links (Side-by-side with copyright) */}
-            <div className="footer-mobile-legal-wrap">
-              <span className="footer-mobile-pipe" aria-hidden="true" />
-              <div className="footer-mobile-legal">
-                <a href="#privacy">Privacy Policy</a>
-                <a href="#terms">Terms & Conditions</a>
-              </div>
-            </div>
+
           </div>
 
           {/* Desktop Security Info & Back to Top */}

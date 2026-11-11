@@ -209,6 +209,50 @@ export const RelyconLogo: React.FC<ClientLogoProps> = ({ className = '', style }
   </svg>
 );
 
+// Kan Infratech: Bold geometric architectural emblem + KAN INFRATECH
+export const KanInfratechLogo: React.FC<ClientLogoProps> = ({ className = '', style }) => (
+  <svg
+    className={className}
+    style={style}
+    viewBox="0 0 138 38"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g transform="translate(4, 4)">
+      <path
+        d="M3 28 V4 L16 17 L29 4 V28"
+        stroke="#0F2A4A"
+        strokeWidth="3.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <polygon points="16,0 25,9 16,9" fill="#D97706" />
+    </g>
+    <text
+      x="40"
+      y="20"
+      fontFamily="'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif"
+      fontWeight="900"
+      fontSize="21"
+      fill="#0F2A4A"
+      letterSpacing="0.06em"
+    >
+      KAN
+    </text>
+    <text
+      x="40"
+      y="33"
+      fontFamily="'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif"
+      fontWeight="800"
+      fontSize="10"
+      fill="#D97706"
+      letterSpacing="0.22em"
+    >
+      INFRATECH
+    </text>
+  </svg>
+);
+
 // 6. Antara: Centered Lotus flower + antara INTEGRATED WELLNESS
 export const AntaraLogo: React.FC<ClientLogoProps> = ({ className = '', style }) => (
   <svg

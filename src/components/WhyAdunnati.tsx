@@ -1,46 +1,62 @@
-import React from 'react';
-
-interface WhyCardItem {
-  id: string;
-  num: string;
-  title: [string, string];
-  subtext: string;
-  desktopCardImg: string;
-  mobileCardImg: string;
-}
-
-const WHY_CARDS: WhyCardItem[] = [
-  {
-    id: 'understand',
-    num: '01',
-    title: ['WE UNDERSTAND', 'BEFORE WE PLAN'],
-    subtext: 'Every business has a different starting point. We take the time to understand yours.',
-    desktopCardImg: '/assets/why-card-desktop-1.webp',
-    mobileCardImg: '/assets/why-card-mobile-1.webp',
-  },
-  {
-    id: 'focus',
-    num: '02',
-    title: ['WE FOCUS ON', 'WHAT MATTERS MOST'],
-    subtext: "The right work is not about doing more. It's about doing what serves the business best.",
-    desktopCardImg: '/assets/why-card-desktop-2.webp',
-    mobileCardImg: '/assets/why-card-mobile-2.webp',
-  },
-  {
-    id: 'looking-better',
-    num: '03',
-    title: ['WE KEEP LOOKING', 'FOR BETTER'],
-    subtext: 'We use performance, customer response and practical learning to shape the next step.',
-    desktopCardImg: '/assets/why-card-desktop-3.webp',
-    mobileCardImg: '/assets/why-card-mobile-3.webp',
-  },
-];
+import React, { useRef, useState } from 'react';
+import { WHY_CARDS } from '../data/content';
 
 export const WhyAdunnati: React.FC = () => {
+  const gridRef = useRef<HTMLDivElement | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleGridScroll = () => {
+    const grid = gridRef.current;
+    if (!grid) return;
+
+    const maxScroll = grid.scrollWidth - grid.clientWidth;
+    if (maxScroll > 0 && grid.scrollLeft >= maxScroll - 8) {
+      setActiveIndex((prev) => (prev === WHY_CARDS.length - 1 ? prev : WHY_CARDS.length - 1));
+      return;
+    }
+
+    const leftPad = parseFloat(getComputedStyle(grid).paddingLeft) || 0;
+    const cards = Array.from(grid.children) as HTMLElement[];
+    let closestIndex = 0;
+    let minDistance = Infinity;
+
+    cards.forEach((card, index) => {
+      const distance = Math.abs(card.offsetLeft - leftPad - grid.scrollLeft);
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestIndex = index;
+      }
+    });
+
+    setActiveIndex((prev) => (prev === closestIndex ? prev : closestIndex));
+  };
+
+  const scrollToCard = (index: number) => {
+    const grid = gridRef.current;
+    if (!grid) return;
+
+    const cards = Array.from(grid.children) as HTMLElement[];
+    const target = cards[index];
+    if (!target) return;
+
+    const leftPad = parseFloat(getComputedStyle(grid).paddingLeft) || 0;
+    const maxScroll = Math.max(0, grid.scrollWidth - grid.clientWidth);
+    const targetLeft =
+      index === WHY_CARDS.length - 1
+        ? maxScroll
+        : Math.min(maxScroll, Math.max(0, target.offsetLeft - leftPad));
+
+    grid.scrollTo({
+      left: targetLeft,
+      behavior: 'smooth',
+    });
+    setActiveIndex(index);
+  };
+
   return (
     <section className="why-section" id="why-adunnati">
       <div className="container why-container">
-        {/* Header Block: Eyebrow + Headline + Divider + Narrative (Desktop: side-by-side | Mobile: clean stacked) */}
+        {/* Header Block: Eyebrow + Headline + Divider + Narrative */}
         <div className="why-header">
           <div className="why-header-left">
             <div className="why-eyebrow">
@@ -49,8 +65,8 @@ export const WhyAdunnati: React.FC = () => {
             </div>
 
             <h2 className="why-heading">
-              Thoughtful Strategy<br />
-              <span className="why-heading-gold">Work That Means Business</span>
+              Thoughtful Strategy Work <br />
+              <span className="why-heading-gold">That Means Business</span>
             </h2>
           </div>
 
@@ -59,38 +75,57 @@ export const WhyAdunnati: React.FC = () => {
 
             <div className="why-subheading-wrap">
               <p className="why-subheading">
-                We believe good marketing starts with understanding the business behind it.
-              </p>
-              <p className="why-subheading">
-                The goals, the customer, the offer and the numbers all matter. We bring these pieces together to build a clear direction, execute with intent and keep improving based on what the work tells us.
+                The goals, the customer, the offer and the numbers all matter. We bring them together, execute with
+                intent and keep improving based on results.
               </p>
             </div>
           </div>
         </div>
 
-        {/* 3 Pillar Cards: seamless luxury composition matching reference design */}
-        <div className="why-grid">
+        {/* 3 Pillar Cards: Clean HTML Typography + HD Artwork Visual */}
+        <div className="why-grid" ref={gridRef} onScroll={handleGridScroll}>
           {WHY_CARDS.map((card) => (
             <article className="why-card" key={card.id}>
-              {/* Responsive picture: loads seamless desktop card (3 cols) or seamless horizontal mobile card */}
-              <picture className="why-card-picture">
-                <source media="(max-width: 768px)" srcSet={card.mobileCardImg} />
-                <img
-                  src={card.desktopCardImg}
-                  alt={`${card.num} ${card.title.join(' ')}: ${card.subtext}`}
-                  className="why-seamless-card-img"
-                  loading="lazy"
-                  width="608"
-                  height="211"
-                />
-              </picture>
+              <div className="why-card-content">
+                <div className="why-card-meta">
+                  <span className="why-card-num">{card.num}</span>
+                  <span className="why-card-line" aria-hidden="true" />
+                </div>
+                <h3 className="why-card-title">
+                  {card.title[0]} <br/> {card.title[1]}
+                </h3>
+                <p className="why-card-desc">
+                  {card.subtext}
+                </p>
+              </div>
 
-              {/* Accessible DOM text for SEO and screen readers */}
-              <div className="sr-only">
-                <h3>{card.num} {card.title.join(' ')}</h3>
-                <p>{card.subtext}</p>
+              <div className="why-card-visual">
+                <picture className="why-card-picture">
+                  <source media="(max-width: 768px)" srcSet={card.mobileArtImg} />
+                  <img
+                    src={card.desktopArtImg}
+                    alt={`${card.num} ${card.title.join(' ')}`}
+                    className="why-card-art-img"
+                    loading="lazy"
+                    width="600"
+                    height="434"
+                  />
+                </picture>
               </div>
             </article>
+          ))}
+        </div>
+
+        <div className="why-dots" aria-label="Why Adunnati cards pagination">
+          {WHY_CARDS.map((card, index) => (
+            <button
+              key={card.id}
+              type="button"
+              aria-pressed={activeIndex === index}
+              aria-label={`Show card ${card.num}: ${card.title.join(' ')}`}
+              className={`why-dot${activeIndex === index ? ' is-active' : ''}`}
+              onClick={() => scrollToCard(index)}
+            />
           ))}
         </div>
       </div>

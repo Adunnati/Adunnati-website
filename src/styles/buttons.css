@@ -1,0 +1,179 @@
+/* ==========================================================================
+   ADUNNATI DESIGN SYSTEM — BUTTONS
+   Universal button hierarchy, interactive micro-interactions & aliases.
+   ========================================================================== */
+
+/* -------------------------------------------------------------------------
+   1. Base Button
+   ------------------------------------------------------------------------- */
+.ad-btn,
+.dark-button,
+.hero-button,
+.outline-button,
+.services-view-all-btn,
+.about-cta-btn,
+.talk-submit-btn,
+.header-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: var(--font-btn);
+    font-weight: var(--weight-semibold);
+    font-size: 14.5px;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    text-decoration: none;
+    border-radius: 9999px !important;
+    padding: 14px 28px;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: all var(--transition-smooth);
+    position: relative;
+    white-space: nowrap;
+    border: 1px solid transparent;
+}
+
+.ad-btn:focus-visible,
+.dark-button:focus-visible,
+.hero-button:focus-visible,
+.talk-submit-btn:focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 2px;
+}
+
+/* -------------------------------------------------------------------------
+   2. Button Variants
+   ------------------------------------------------------------------------- */
+
+/* Primary: Dark Luxury Solid (Hero, Call to Action, Form Submit) */
+.ad-btn-primary,
+.dark-button,
+.hero-button,
+.talk-submit-btn {
+    background: var(--color-ink);
+    color: var(--color-white);
+    border-color: var(--color-ink);
+    border-radius: 9999px !important;
+    box-shadow: 0 4px 16px rgba(20, 19, 18, 0.15);
+}
+
+.ad-btn-primary:hover,
+.dark-button:hover,
+.hero-button:hover,
+.talk-submit-btn:hover {
+    background: #252422;
+    color: var(--color-white);
+    border-color: #252422;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(20, 19, 18, 0.22);
+}
+
+.hero-button {
+    min-width: 190px;
+    padding: 15px 30px;
+    border-radius: 9999px !important;
+}
+
+@media (max-width: 768px) {
+    .hero-button {
+        width: auto !important;
+        max-width: fit-content;
+        min-width: 0;
+        justify-content: flex-start;
+        padding: 13px 24px !important;
+        border-radius: 9999px !important;
+    }
+}
+
+/* Outline: Frosted Luxury Glass Border (Services View All, Secondary CTA) */
+.ad-btn-outline,
+.outline-button,
+.services-view-all-btn,
+.about-cta-btn {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: var(--color-ink);
+    border: 1px solid #C8C0B2;
+    border-radius: 9999px !important;
+    box-shadow: 0 2px 8px rgba(24, 20, 16, 0.03);
+}
+
+.ad-btn-outline:hover,
+.outline-button:hover,
+.services-view-all-btn:hover,
+.about-cta-btn:hover {
+    background: var(--color-ink);
+    color: var(--color-white);
+    border-color: var(--color-ink);
+    border-radius: 9999px !important;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-btn-hover);
+}
+
+/* Gold Accent Button */
+.ad-btn-gold {
+    background: var(--color-gold);
+    color: var(--color-white);
+    border-color: var(--color-gold);
+    box-shadow: 0 4px 14px rgba(189, 133, 69, 0.25);
+}
+
+.ad-btn-gold:hover {
+    background: var(--color-gold-deep);
+    border-color: var(--color-gold-deep);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(189, 133, 69, 0.35);
+}
+
+/* Ghost / Text Button */
+.ad-btn-ghost {
+    background: transparent;
+    color: var(--color-ink);
+    border-color: transparent;
+    padding: 8px 14px;
+}
+
+.ad-btn-ghost:hover {
+    color: var(--color-gold);
+}
+
+/* -------------------------------------------------------------------------
+   3. Sizing Modifiers
+   ------------------------------------------------------------------------- */
+.ad-btn-sm {
+    padding: var(--btn-pad-sm);
+    font-size: 12px;
+}
+
+.ad-btn-md {
+    padding: var(--btn-pad-md);
+    font-size: 13.5px;
+}
+
+.ad-btn-lg {
+    padding: var(--btn-pad-lg);
+    font-size: 14.5px;
+}
+
+/* -------------------------------------------------------------------------
+   4. Icon & Arrow Micro-Interactions
+   ------------------------------------------------------------------------- */
+.ad-btn-arrow,
+.hero-btn-arrow,
+.services-arrow-icon,
+.about-cta-arrow {
+    display: inline-block;
+    transition: transform var(--transition-smooth);
+}
+
+.ad-btn:hover .ad-btn-arrow,
+.ad-btn-primary:hover .hero-btn-arrow,
+.ad-btn-outline:hover .services-arrow-icon,
+.about-cta-btn:hover .about-cta-arrow,
+.hero-button:hover .hero-btn-arrow,
+.dark-button:hover .hero-btn-arrow {
+    transform: translate(2.5px, -2.5px);
+}
+

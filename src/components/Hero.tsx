@@ -10,7 +10,8 @@ export const Hero: React.FC = () => {
           DIGITAL STRATEGY <i>·</i> MARKETING <i>·</i> GROWTH
         </div>
         <h1 className="hero-headline">
-          Make Your Next Stage of Growth Count
+          Make Your Next Stage<br />
+          of Growth Count
         </h1>
         <p className="hero-subheading">
           We help ambitious businesses build a stronger digital presence, acquire customers and turn marketing investment into meaningful business results.

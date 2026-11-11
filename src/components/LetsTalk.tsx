@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   LightbulbIcon,
   PencilIcon,
@@ -7,77 +7,77 @@ import {
   MailIcon,
   WhatsAppIcon,
   BuildingIcon,
-  GridSquareIcon,
-  ListCheckIcon,
   ChatDotsIcon,
-  ChevronDownIcon,
   LockIcon,
 } from './icons/TalkIcons';
 import { ArrowUpRight } from './icons/ArrowUpRight';
 
-const HELP_OPTIONS = [
-  'Digital Marketing & Performance',
-  'Brand Strategy & Identity',
-  'Website Design & Development',
-  'Content & Creative Direction',
-  'Full-Funnel Growth Partnership',
-  'Other / Exploration',
-];
+interface TalkFormData {
+  fullName: string;
+  workEmail: string;
+  whatsappNumber: string;
+  companyName: string;
+  message: string;
+}
 
-const REQUIREMENT_OPTIONS = [
-  'Scale Customer Inquiries & Sales',
-  'Build / Redesign Brand Website',
-  'Brand Refresh & Visual Messaging',
-  'Improve Paid Ad ROAS & Funnel',
-  'Ongoing Marketing Retainer',
-  'Consultation & Strategic Audit',
+const INITIAL_FORM_DATA: TalkFormData = {
+  fullName: '',
+  workEmail: '',
+  whatsappNumber: '',
+  companyName: '',
+  message: '',
+};
+
+const TALK_INPUT_FIELDS: Array<{
+  name: Exclude<keyof TalkFormData, 'message'>;
+  type: React.HTMLInputTypeAttribute;
+  placeholder: string;
+  autoComplete: string;
+  required: boolean;
+  renderIcon: () => React.ReactNode;
+}> = [
+  {
+    name: 'fullName',
+    type: 'text',
+    placeholder: 'Full Name *',
+    autoComplete: 'name',
+    required: true,
+    renderIcon: () => <UserIcon size={19} color="#B58748" />,
+  },
+  {
+    name: 'workEmail',
+    type: 'email',
+    placeholder: 'Work Email *',
+    autoComplete: 'email',
+    required: true,
+    renderIcon: () => <MailIcon size={19} color="#B58748" />,
+  },
+  {
+    name: 'whatsappNumber',
+    type: 'tel',
+    placeholder: 'Whatsapp Number *',
+    autoComplete: 'tel',
+    required: true,
+    renderIcon: () => <WhatsAppIcon size={19} color="#B58748" />,
+  },
+  {
+    name: 'companyName',
+    type: 'text',
+    placeholder: 'Company / Brand Name',
+    autoComplete: 'organization',
+    required: false,
+    renderIcon: () => <BuildingIcon size={19} color="#B58748" />,
+  },
 ];
 
 export const LetsTalk: React.FC = () => {
-  const [formData, setFormData] = useState({
-    fullName: '',
-    workEmail: '',
-    whatsappNumber: '',
-    companyName: '',
-    helpWith: '',
-    mainRequirement: '',
-    message: '',
-  });
-
-  const [activeDropdown, setActiveDropdown] = useState<'help' | 'requirement' | null>(null);
+  const [formData, setFormData] = useState<TalkFormData>(INITIAL_FORM_DATA);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-
-  const helpDropdownRef = useRef<HTMLDivElement>(null);
-  const reqDropdownRef = useRef<HTMLDivElement>(null);
-
-  // Close dropdown on outside click
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as Node;
-      if (
-        helpDropdownRef.current &&
-        !helpDropdownRef.current.contains(target) &&
-        reqDropdownRef.current &&
-        !reqDropdownRef.current.contains(target)
-      ) {
-        setActiveDropdown(null);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    if (errorMessage) setErrorMessage('');
-  };
-
-  const handleSelectOption = (field: 'helpWith' | 'mainRequirement', value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-    setActiveDropdown(null);
     if (errorMessage) setErrorMessage('');
   };
 
@@ -94,14 +94,6 @@ export const LetsTalk: React.FC = () => {
     }
     if (!formData.whatsappNumber.trim()) {
       setErrorMessage('Please enter your WhatsApp number.');
-      return;
-    }
-    if (!formData.helpWith) {
-      setErrorMessage('Please select what you need help with.');
-      return;
-    }
-    if (!formData.mainRequirement) {
-      setErrorMessage('Please select your main requirement.');
       return;
     }
 
@@ -231,15 +223,7 @@ export const LetsTalk: React.FC = () => {
                     className="talk-reset-btn"
                     onClick={() => {
                       setIsSubmitted(false);
-                      setFormData({
-                        fullName: '',
-                        workEmail: '',
-                        whatsappNumber: '',
-                        companyName: '',
-                        helpWith: '',
-                        mainRequirement: '',
-                        message: '',
-                      });
+                      setFormData(INITIAL_FORM_DATA);
                     }}
                   >
                     Send another enquiry
@@ -253,186 +237,25 @@ export const LetsTalk: React.FC = () => {
                     </div>
                   )}
 
-                  {/* Row 1: Full Name & Work Email */}
-                  <div className="talk-form-row talk-form-row-2col">
-                    <div className="talk-input-field">
-                      <span className="talk-field-icon" aria-hidden="true">
-                        <UserIcon size={19} color="#B58748" />
-                      </span>
-                      <input
-                        type="text"
-                        name="fullName"
-                        value={formData.fullName}
-                        onChange={handleInputChange}
-                        placeholder="Full Name *"
-                        className="talk-input"
-                        autoComplete="name"
-                        required
-                      />
-                    </div>
-
-                    <div className="talk-input-field">
-                      <span className="talk-field-icon" aria-hidden="true">
-                        <MailIcon size={19} color="#B58748" />
-                      </span>
-                      <input
-                        type="email"
-                        name="workEmail"
-                        value={formData.workEmail}
-                        onChange={handleInputChange}
-                        placeholder="Work Email *"
-                        className="talk-input"
-                        autoComplete="email"
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  {/* Row 2: WhatsApp Number & Company Name */}
-                  <div className="talk-form-row talk-form-row-2col">
-                    <div className="talk-input-field">
-                      <span className="talk-field-icon" aria-hidden="true">
-                        <WhatsAppIcon size={19} color="#B58748" />
-                      </span>
-                      <input
-                        type="tel"
-                        name="whatsappNumber"
-                        value={formData.whatsappNumber}
-                        onChange={handleInputChange}
-                        placeholder="Whatsapp Number *"
-                        className="talk-input"
-                        autoComplete="tel"
-                        required
-                      />
-                    </div>
-
-                    <div className="talk-input-field">
-                      <span className="talk-field-icon" aria-hidden="true">
-                        <BuildingIcon size={19} color="#B58748" />
-                      </span>
-                      <input
-                        type="text"
-                        name="companyName"
-                        value={formData.companyName}
-                        onChange={handleInputChange}
-                        placeholder="Company / Brand Name"
-                        className="talk-input"
-                        autoComplete="organization"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Row 3: What do you need help with? */}
-                  <div className="talk-form-row" ref={helpDropdownRef}>
-                    <div
-                      className={`talk-select-field ${activeDropdown === 'help' ? 'is-active' : ''}`}
-                      onClick={() => setActiveDropdown(activeDropdown === 'help' ? null : 'help')}
-                      role="button"
-                      tabIndex={0}
-                      aria-haspopup="listbox"
-                      aria-expanded={activeDropdown === 'help'}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault();
-                          setActiveDropdown(activeDropdown === 'help' ? null : 'help');
-                        }
-                      }}
-                    >
-                      <span className="talk-field-icon" aria-hidden="true">
-                        <GridSquareIcon size={19} color="#B58748" />
-                      </span>
-                      <div className="talk-select-content">
-                        <span className="talk-select-label">What do you need help with? *</span>
-                        <span className={`talk-select-value ${formData.helpWith ? 'has-value' : 'is-placeholder'}`}>
-                          {formData.helpWith || 'Select an option'}
+                  {TALK_INPUT_FIELDS.map((field) => (
+                    <div className="talk-form-row" key={field.name}>
+                      <div className="talk-input-field">
+                        <span className="talk-field-icon" aria-hidden="true">
+                          {field.renderIcon()}
                         </span>
+                        <input
+                          type={field.type}
+                          name={field.name}
+                          value={formData[field.name]}
+                          onChange={handleInputChange}
+                          placeholder={field.placeholder}
+                          className="talk-input"
+                          autoComplete={field.autoComplete}
+                          required={field.required}
+                        />
                       </div>
-                      <span className={`talk-chevron-icon ${activeDropdown === 'help' ? 'rotated' : ''}`} aria-hidden="true">
-                        <ChevronDownIcon size={18} color="#B58748" />
-                      </span>
                     </div>
-
-                    {/* Dropdown Menu */}
-                    {activeDropdown === 'help' && (
-                      <ul className="talk-dropdown-menu" role="listbox">
-                        {HELP_OPTIONS.map((opt) => (
-                          <li
-                            key={opt}
-                            className={`talk-dropdown-item ${formData.helpWith === opt ? 'selected' : ''}`}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleSelectOption('helpWith', opt);
-                            }}
-                            role="option"
-                            aria-selected={formData.helpWith === opt}
-                          >
-                            <span>{opt}</span>
-                            {formData.helpWith === opt && (
-                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B58748" strokeWidth="2.5">
-                                <polyline points="20 6 9 17 4 12" />
-                              </svg>
-                            )}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-
-                  {/* Row 4: What is your main requirement? */}
-                  <div className="talk-form-row" ref={reqDropdownRef}>
-                    <div
-                      className={`talk-select-field ${activeDropdown === 'requirement' ? 'is-active' : ''}`}
-                      onClick={() => setActiveDropdown(activeDropdown === 'requirement' ? null : 'requirement')}
-                      role="button"
-                      tabIndex={0}
-                      aria-haspopup="listbox"
-                      aria-expanded={activeDropdown === 'requirement'}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault();
-                          setActiveDropdown(activeDropdown === 'requirement' ? null : 'requirement');
-                        }
-                      }}
-                    >
-                      <span className="talk-field-icon" aria-hidden="true">
-                        <ListCheckIcon size={19} color="#B58748" />
-                      </span>
-                      <div className="talk-select-content">
-                        <span className="talk-select-label">What is your main requirement? *</span>
-                        <span className={`talk-select-value ${formData.mainRequirement ? 'has-value' : 'is-placeholder'}`}>
-                          {formData.mainRequirement || 'Select an option'}
-                        </span>
-                      </div>
-                      <span className={`talk-chevron-icon ${activeDropdown === 'requirement' ? 'rotated' : ''}`} aria-hidden="true">
-                        <ChevronDownIcon size={18} color="#B58748" />
-                      </span>
-                    </div>
-
-                    {/* Dropdown Menu */}
-                    {activeDropdown === 'requirement' && (
-                      <ul className="talk-dropdown-menu" role="listbox">
-                        {REQUIREMENT_OPTIONS.map((opt) => (
-                          <li
-                            key={opt}
-                            className={`talk-dropdown-item ${formData.mainRequirement === opt ? 'selected' : ''}`}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleSelectOption('mainRequirement', opt);
-                            }}
-                            role="option"
-                            aria-selected={formData.mainRequirement === opt}
-                          >
-                            <span>{opt}</span>
-                            {formData.mainRequirement === opt && (
-                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B58748" strokeWidth="2.5">
-                                <polyline points="20 6 9 17 4 12" />
-                              </svg>
-                            )}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
+                  ))}
 
                   {/* Row 5: Textarea */}
                   <div className="talk-form-row">
@@ -452,10 +275,10 @@ export const LetsTalk: React.FC = () => {
                   </div>
 
                   {/* Row 6: Submit Button */}
-                  <div className="talk-form-row">
+                  <div className="talk-form-row talk-submit-row">
                     <button type="submit" className="talk-submit-btn" id="talk-send-enquiry-btn">
                       <span>Send Enquiry</span>
-                      <ArrowUpRight size={17} strokeWidth={2.4} className="talk-submit-arrow" />
+                      <ArrowUpRight size={15} strokeWidth={2.4} className="talk-submit-arrow" />
                     </button>
                   </div>
 

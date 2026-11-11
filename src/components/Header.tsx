@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  const headerRef = useRef<HTMLElement | null>(null);
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
@@ -10,6 +12,71 @@ export const Header: React.FC = () => {
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
+
+  // Continuous frame-rate-independent scroll interpolation for butter-smooth header transition
+  useEffect(() => {
+    const headerEl = headerRef.current;
+    if (!headerEl) return;
+
+    let current = Math.min(Math.max(window.scrollY / 110, 0), 1);
+    let target = current;
+    let rafId: number | null = null;
+    let lastTime = performance.now();
+
+    const applyProgress = (value: number) => {
+      headerEl.style.setProperty('--scroll-p', value.toFixed(4));
+      setIsScrolled((prev) => {
+        const next = value > 0.35;
+        return prev === next ? prev : next;
+      });
+    };
+
+    applyProgress(current);
+
+    const tick = (now: number) => {
+      const dt = Math.min((now - lastTime) / 1000, 0.05);
+      lastTime = now;
+
+      const factor = 1 - Math.exp(-11 * dt);
+      current += (target - current) * factor;
+
+      if (Math.abs(target - current) < 0.001) {
+        current = target;
+        applyProgress(current);
+        rafId = null;
+        return;
+      }
+
+      applyProgress(current);
+      rafId = window.requestAnimationFrame(tick);
+    };
+
+    const handleScroll = () => {
+      const raw = Math.min(Math.max(window.scrollY / 110, 0), 1);
+      // Smoothstep easing on raw scroll position
+      target = raw * raw * (3 - 2 * raw);
+
+      if (rafId === null) {
+        lastTime = performance.now();
+        rafId = window.requestAnimationFrame(tick);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (rafId !== null) {
+        window.cancelAnimationFrame(rafId);
+      }
+    };
+  }, []);
+
+  // Sync mobile browser status/address bar theme-color with header surface
+  useEffect(() => {
+    const themeColorMeta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+    if (!themeColorMeta) return;
+    themeColorMeta.content = isScrolled || isMenuOpen ? '#0D0C0B' : '#FAF8F4';
+  }, [isScrolled, isMenuOpen]);
 
   // Lock body scroll when mobile drawer is open
   useEffect(() => {
@@ -33,6 +100,17 @@ export const Header: React.FC = () => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isMenuOpen]);
+
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (isMenuOpen) {
+      closeMenu();
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (window.location.hash) {
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+  };
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
@@ -59,40 +137,52 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header className={`site-header${isMenuOpen ? ' menu-open' : ''}`}>
-      <a href="#home" className="logo" aria-label="Adunnati — Build · Market · Grow" onClick={(e) => handleNavClick(e, 'home')}>
-        <img
-          src="/assets/adunnati-mark.png"
-          alt="Adunnati Mark"
-          className="logo-mark"
-        />
-        <div className="logo-text-group">
-          <span className="logo-brand-name">ADUNNATI</span>
-          <span className="logo-tagline">BUILD · MARKET · GROW</span>
+    <>
+      <header ref={headerRef} className={`site-header${isMenuOpen ? ' menu-open' : ''}${isScrolled ? ' is-scrolled' : ''}`}>
+        <div className="site-header-inner">
+          <a href="/" className="logo" aria-label="Adunnati — Build · Market · Grow" onClick={handleLogoClick}>
+            <span className="logo-mark-stack">
+              <img
+                src="/assets/adunnati-mark.png"
+                alt="Adunnati Mark"
+                className="logo-mark logo-mark--default"
+              />
+              <img
+                src="/assets/adunnati-mark-white.png"
+                alt=""
+                aria-hidden="true"
+                className="logo-mark logo-mark--scrolled"
+              />
+            </span>
+            <div className="logo-text-group">
+              <span className="logo-brand-name">ADUNNATI</span>
+              <span className="logo-tagline">BUILD · MARKET · GROW</span>
+            </div>
+          </a>
+
+          {/* Desktop Navigation (Visible on Desktop only) */}
+          <nav className="desktop-nav" aria-label="Main navigation">
+            <a href="#services" onClick={(e) => handleNavClick(e, 'services')}>Expertise</a>
+            <a href="#why-adunnati" onClick={(e) => handleNavClick(e, 'why-adunnati')}>Approach</a>
+            <a href="#about-us" onClick={(e) => handleNavClick(e, 'about-us')}>About</a>
+            <a href="#partners" onClick={(e) => handleNavClick(e, 'partners')}>Partners</a>
+            <a href="#lets-talk" onClick={(e) => handleNavClick(e, 'lets-talk')}>Connect</a>
+          </nav>
+
+          {/* Mobile Menu Toggle (Three Lines at top right corner on mobile only) */}
+          <button
+            className={`mobile-menu-toggle${isMenuOpen ? ' open' : ''}`}
+            aria-label={isMenuOpen ? 'Close navigation' : 'Open navigation'}
+            aria-expanded={isMenuOpen}
+            onClick={toggleMenu}
+            type="button"
+          >
+            <span className="hamburger-bar"></span>
+            <span className="hamburger-bar"></span>
+            <span className="hamburger-bar"></span>
+          </button>
         </div>
-      </a>
-
-      {/* Desktop Navigation (Visible on Desktop only) */}
-      <nav className="desktop-nav" aria-label="Main navigation">
-        <a href="#services" onClick={(e) => handleNavClick(e, 'services')}>Expertise</a>
-        <a href="#why-adunnati" onClick={(e) => handleNavClick(e, 'why-adunnati')}>Approach</a>
-        <a href="#about-us" onClick={(e) => handleNavClick(e, 'about-us')}>About</a>
-        <a href="#partners" onClick={(e) => handleNavClick(e, 'partners')}>Partners</a>
-        <a href="#lets-talk" onClick={(e) => handleNavClick(e, 'lets-talk')}>Connect</a>
-      </nav>
-
-      {/* Mobile Menu Toggle (Three Lines at top right corner on mobile only) */}
-      <button
-        className={`mobile-menu-toggle${isMenuOpen ? ' open' : ''}`}
-        aria-label={isMenuOpen ? 'Close navigation' : 'Open navigation'}
-        aria-expanded={isMenuOpen}
-        onClick={toggleMenu}
-        type="button"
-      >
-        <span className="hamburger-bar"></span>
-        <span className="hamburger-bar"></span>
-        <span className="hamburger-bar"></span>
-      </button>
+      </header>
 
       {/* Mobile Dark Theme Backdrop */}
       <div
@@ -226,6 +316,6 @@ export const Header: React.FC = () => {
           </div>
         </div>
       </aside>
-    </header>
+    </>
   );
 };

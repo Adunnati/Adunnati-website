@@ -1,0 +1,219 @@
+/* ==========================================================================
+   ADUNNATI DESIGN SYSTEM — LAYOUT & SECTION RHYTHMS
+   Guarantees symmetric vertical spacing and left/right gutters on all devices.
+   ========================================================================== */
+
+/* -------------------------------------------------------------------------
+   1. Universal Section Wrapper
+   ------------------------------------------------------------------------- */
+.ad-section,
+.services-section,
+.why-section,
+.about-section,
+.clients-section,
+.work-section,
+.talk-section {
+    padding-top: var(--section-pad-y-desktop);
+    padding-bottom: var(--section-pad-y-desktop);
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0;
+    position: relative;
+    box-sizing: border-box;
+    background-color: var(--color-bg-cream);
+}
+
+/* -------------------------------------------------------------------------
+   2. Universal Container (Horizontal Alignment Standard)
+   ------------------------------------------------------------------------- */
+.ad-container,
+.container,
+.services-container,
+.why-container,
+.about-container,
+.clients-container,
+.talk-container,
+.footer-container,
+.site-header-inner,
+.hero-content-stage {
+    width: var(--container-width-desktop);
+    max-width: var(--container-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    position: relative;
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+}
+
+/* -------------------------------------------------------------------------
+   3. Universal Section Intro Header (Desktop Split / Mobile Stacked)
+   ------------------------------------------------------------------------- */
+.ad-section-header,
+.services-intro,
+.why-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: end;
+    gap: 24px;
+    margin-bottom: 44px;
+    position: relative;
+    z-index: 2;
+}
+
+.clients-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--section-header-gap-desktop);
+    margin-bottom: 44px;
+    position: relative;
+    z-index: 2;
+}
+
+.ad-section-header-left,
+.services-intro-left,
+.why-header-left {
+    min-width: 0;
+}
+
+.clients-header-left {
+    flex-shrink: 0;
+}
+
+.ad-section-header-right,
+.services-intro-right,
+.why-header-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+    max-width: none;
+    padding-bottom: 6px;
+}
+
+.clients-header-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    max-width: 480px;
+    padding-bottom: 8px;
+}
+
+/* -------------------------------------------------------------------------
+   4. Responsive Breakpoints & Symmetries
+   ------------------------------------------------------------------------- */
+@media (max-width: 991px) {
+    .ad-section,
+    .services-section,
+    .why-section,
+    .about-section,
+    .clients-section,
+    .work-section,
+    .talk-section {
+        padding-top: var(--section-pad-y-tablet) !important;
+        padding-bottom: var(--section-pad-y-tablet) !important;
+        margin: 0 !important;
+    }
+
+    .ad-container,
+    .container,
+    .services-container,
+    .why-container,
+    .about-container,
+    .clients-container,
+    .talk-container,
+    .footer-container,
+    .site-header-inner,
+    .hero-content-stage {
+        width: var(--container-width-tablet) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .ad-section,
+    .services-section,
+    .why-section,
+    .about-section,
+    .clients-section,
+    .work-section,
+    .talk-section {
+        padding-top: var(--section-pad-y-tablet) !important;
+        padding-bottom: var(--section-pad-y-tablet) !important;
+        margin: 0 !important;
+    }
+
+    .ad-container,
+    .container,
+    .services-container,
+    .why-container,
+    .about-container,
+    .clients-container,
+    .talk-container,
+    .footer-container,
+    .site-header-inner,
+    .hero-content-stage {
+        width: var(--container-width-tablet) !important;
+    }
+
+    .ad-section-header,
+    .services-intro,
+    .why-header {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        margin-bottom: 28px;
+    }
+
+    .clients-header {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--section-header-gap-mobile);
+        margin-bottom: 28px;
+    }
+
+    .ad-section-header-left,
+    .services-intro-left,
+    .why-header-left,
+    .clients-header-left,
+    .ad-section-header-right,
+    .services-intro-right,
+    .why-header-right,
+    .clients-header-right {
+        max-width: 100%;
+        width: 100%;
+        flex: none;
+        align-items: flex-start;
+        padding-bottom: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .ad-section,
+    .services-section,
+    .why-section,
+    .about-section,
+    .clients-section,
+    .work-section,
+    .talk-section {
+        padding-top: var(--section-pad-y-mobile) !important;
+        padding-bottom: var(--section-pad-y-mobile) !important;
+        margin: 0 !important;
+    }
+
+    .ad-container,
+    .container,
+    .services-container,
+    .why-container,
+    .about-container,
+    .clients-container,
+    .talk-container,
+    .footer-container,
+    .site-header-inner,
+    .hero-content-stage {
+        width: var(--container-width-mobile) !important;
+    }
+}
+

@@ -59,7 +59,7 @@ export interface ServiceBullet {
   link: string; // Ready for future router navigation (e.g. '/services/websites')
 }
 
-export interface ServiceCardItem {
+export interface ServiceCardItem { 
   number: string;
   badge: React.ReactNode;
   titleLine1: string;
@@ -76,17 +76,17 @@ const servicesData: ServiceCardItem[] = [
   {
     number: '01',
     badge: <LaptopIcon />,
-    titleLine1: 'Build Your',
-    titleLine2: 'Digital Presence',
+    titleLine1: 'Build Your Digital Presence',
+    titleLine2: '',
     descBefore: 'Build a strong online presence that gets you noticed and brings the ',
     descUnderline: 'right customers',
     descAfter: '.',
     bullets: [
-      { name: 'Websites', link: '#contact' },
-      { name: 'Landing Pages', link: '#contact' },
-      { name: 'Shopify Stores', link: '#contact' },
-      { name: 'Social Media Management', link: '#contact' },
-      { name: 'Branding', link: '#contact' },
+      { name: 'Websites', link: '' },
+      { name: 'Landing Pages', link: '' },
+      { name: 'Shopify Stores', link: '' },
+      { name: 'Social Media Management', link: '' },
+      { name: 'Branding', link: '' },
     ],
     sceneImg: '/assets/service-card-scene-1.webp',
     sceneAlt: 'Laptop with your brand online on travertine stone with stacked website blocks and plant',
@@ -94,17 +94,17 @@ const servicesData: ServiceCardItem[] = [
   {
     number: '02',
     badge: <PencilIcon />,
-    titleLine1: 'Create',
-    titleLine2: 'Impactful Content',
-    descBefore: 'Engaging visuals and messaging that connect with your audience and create ',
+    titleLine1: 'Create Impactful Content',
+    titleLine2: '',
+    descBefore: 'Engaging visuals and messaging that connect with audience and create ',
     descUnderline: 'demand',
     descAfter: '.',
     bullets: [
-      { name: 'Static Ads', link: '#contact' },
-      { name: 'Video Ads', link: '#contact' },
-      { name: 'Reels & Short Videos', link: '#contact' },
-      { name: 'E-commerce Photoshoots', link: '#contact' },
-      { name: 'Product Photography', link: '#contact' },
+      { name: 'Static Creatives', link: '' },
+      { name: 'Video Creatives', link: '' },
+      { name: 'Reels & Short Videos', link: '' },
+      { name: 'E-commerce Photoshoots', link: '' },
+      { name: 'Product Photography', link: '' },
     ],
     sceneImg: '/assets/service-card-scene-2.webp',
     sceneAlt: 'Laptop with video editing suite, camera, clapperboard and floating media icons',
@@ -112,17 +112,17 @@ const servicesData: ServiceCardItem[] = [
   {
     number: '03',
     badge: <TargetIcon />,
-    titleLine1: 'Bring in Right',
-    titleLine2: 'Customers',
+    titleLine1: 'Bring in Right Customers',
+    titleLine2: '',
     descBefore: 'Performance marketing to reach the right people and turn interest into ',
     descUnderline: 'enquiries',
     descAfter: ' and sales.',
     bullets: [
-      { name: 'Meta Ads', link: '#contact' },
-      { name: 'Google Ads', link: '#contact' },
-      { name: 'Lead Generation', link: '#contact' },
-      { name: 'E-commerce Sales', link: '#contact' },
-      { name: 'Influencer Ads', link: '#contact' },
+      { name: 'Meta Ads', link: '' },
+      { name: 'Google Ads', link: '' },
+      { name: 'Lead Generation', link: '' },
+      { name: 'E-commerce Sales', link: '' },
+      { name: 'Influencer Ads', link: '' },
     ],
     sceneImg: '/assets/service-card-scene-3.webp',
     sceneAlt: 'Target marketing laptop with floating Meta, Google and audience campaign icons',
@@ -130,17 +130,17 @@ const servicesData: ServiceCardItem[] = [
   {
     number: '04',
     badge: <TrendIcon />,
-    titleLine1: 'Improve',
-    titleLine2: 'What Works',
+    titleLine1: 'Improve Your Digital Growth',
+    titleLine2: '',
     descBefore: 'Data-driven insights and continuous optimisation to help you get better results ',
     descUnderline: 'over time',
     descAfter: '.',
     bullets: [
-      { name: 'Ad Account Audits', link: '#contact' },
-      { name: 'Conversion Optimisation', link: '#contact' },
-      { name: 'ROAS Improvement', link: '#contact' },
-      { name: 'Digital Expansion', link: '#contact' },
-      { name: 'Strategy & Consultation', link: '#contact' },
+      { name: 'Ad Account Audits', link: '' },
+      { name: 'Conversion Optimisation', link: '' },
+      { name: 'ROAS Improvement', link: '' },
+      { name: 'Strategy & Consultation', link: '' },
+      { name: 'Digital Expansion', link: '' },
     ],
     sceneImg: '/assets/service-card-scene-4.webp',
     sceneAlt: 'Analytics dashboard with glowing 3D rising growth bar chart and strategy target',
@@ -195,15 +195,14 @@ export const Services: React.FC = () => {
                   </div>
                   <h3 className="service-card-title">
                     {item.titleLine1}
-                    <br />
-                    {item.titleLine2}
+                    {item.titleLine2 ? <> {item.titleLine2}</> : null}
                   </h3>
                 </div>
 
-                {/* Description paragraph with underlined keyword */}
+                {/* Description paragraph */}
                 <p className="service-card-desc">
                   {item.descBefore}
-                  <u>{item.descUnderline}</u>
+                  {item.descUnderline}
                   {item.descAfter}
                 </p>
 
@@ -212,7 +211,8 @@ export const Services: React.FC = () => {
                   {item.bullets.map((bullet) => (
                     <li key={bullet.name}>
                       <a
-                        href={bullet.link}
+                        href={bullet.link || undefined}
+                        onClick={bullet.link ? undefined : (e) => e.preventDefault()}
                         className="service-bullet-link"
                         title={`View ${bullet.name} service`}
                       >

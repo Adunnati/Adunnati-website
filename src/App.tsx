@@ -23,8 +23,6 @@ export const App: React.FC = () => {
         <About />
         <FeaturedWork />
         <LetsTalk />
-        {/* <Process /> */}
-        {/* <Trust /> */}
         <Footer />
       </main>
     </div>

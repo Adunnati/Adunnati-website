@@ -8,31 +8,32 @@ export interface Metric {
   label: string;
 }
 
-export interface WorkProject {
-  id: string;
-  title: string;
-  category: string;
-  imageClass: string;
-  imageAlt: string;
-  metrics: {
-    roas: string;
-    growth: string;
-    secondary: {
-      value: string;
-      label: string;
-    };
-  };
-}
-
-export interface ProcessStep {
-  number: string;
-  title: string;
-  description: string;
-  iconType: 'search' | 'document' | 'lightning' | 'chart';
-}
-
-export interface Testimonial {
-  text: string;
+export interface ServiceBullet {
   name: string;
-  role: string;
+  link: string; // Ready for future router navigation (e.g. '/services/websites')
 }
+
+export interface ServiceCardItem {
+  number: string;
+  badge: React.ReactNode;
+  titleLine1: string;
+  titleLine2: string;
+  descBefore: string;
+  descUnderline: string;
+  descAfter?: string;
+  bullets: ServiceBullet[];
+  sceneImg: string;
+  sceneAlt: string;
+}
+
+
+export interface WhyCardItem {
+  id: string;
+  num: string;
+  title: [string, string];
+  subtext: string;
+  desktopArtImg: string;
+  mobileArtImg: string;
+}
+
+

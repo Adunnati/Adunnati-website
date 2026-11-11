@@ -4,36 +4,67 @@ import {
   OrganicIndiaLogo,
   ExideCareLogo,
   MTRLogo,
-  RelyconLogo,
-  AntaraLogo,
-  UrjaTechLogo,
-  MyPersonalTutorLogo,
-  AlmmaaiLogo,
+  KanInfratechLogo,
   JaroEducationLogo,
-  ProvidentLogo,
-  RelianceLogo,
 } from './icons/ClientLogos';
 
 interface ClientItem {
   id: string;
   name: string;
-  Component: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
+  Component?: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
+  imgSrc?: string;
+  scale?: number;
 }
 
 const ALL_CLIENTS: ClientItem[] = [
-  { id: 'bajaj-capital', name: 'Bajaj Capital', Component: BajajCapitalLogo },
-  { id: 'organic-india', name: 'Organic India', Component: OrganicIndiaLogo },
-  { id: 'exide-care', name: 'Exide Care', Component: ExideCareLogo },
-  { id: 'mtr', name: 'MTR', Component: MTRLogo },
-  { id: 'relycon', name: 'Relycon', Component: RelyconLogo },
-  { id: 'antara', name: 'Antara Integrated Wellness', Component: AntaraLogo },
-  { id: 'urja-tech', name: 'Urja Tech Industries', Component: UrjaTechLogo },
-  { id: 'mypersonaltutor', name: 'MyPersonalTutor.org', Component: MyPersonalTutorLogo },
-  { id: 'almmaai', name: 'ALMMAI Mind Mentor', Component: AlmmaaiLogo },
-  { id: 'jaro-education', name: 'Jaro Education', Component: JaroEducationLogo },
-  { id: 'provident', name: 'Provident', Component: ProvidentLogo },
-  { id: 'reliance', name: 'Reliance', Component: RelianceLogo },
+  { id: 'bajaj-capital', name: 'Bajaj Capital', imgSrc: '/assets/bajaj_capital_limited_logo.jfif' },
+  { id: 'organic-india', name: 'Organic India', imgSrc: '/assets/organic_india_logo.png' },
+  { id: 'maharishi-ayurveda', name: 'Maharishi Ayurveda', imgSrc: '/assets/maharishi_ayurveda_logo.jfif', scale: 1.15 },
+  { id: 'exide-care', name: 'Exide Care', imgSrc: '/assets/Excide_care_logo.jpg' },
+  { id: 'unext', name: 'Unext', imgSrc: '/assets/Unext_logo_2.jpg', scale: 1.13 },
+  { id: 'uttranchal-university', name: 'Uttranchal University', imgSrc: '/assets/uttranchal_university_logo.jfif', scale: 1.2 },
+  { id: 'aditya-birla-capital', name: 'Aditya Birla Capital', imgSrc: '/assets/aditya_birla_capital_logo.webp' },
+  { id: 'Omax', name: 'Omax', imgSrc: '/assets/omax_logo.jfif', scale: 1.15 },
+  { id: 'bajaj-finserv', name: 'Bajaj Finserv', imgSrc: '/assets/bajaj_finserv_logo.jfif', scale: 1.2 },
+  { id: 'drinkprime', name: 'Drinkprime', imgSrc: '/assets/drinkprime_logo.png' },
+  { id: 'mtr', name: 'MTR', imgSrc: '/assets/MTR _logo_2.png' },
+  { id: 'matrimony-com', name: 'Matrimony.com', imgSrc: '/assets/Matrimmony.com_logo.png' },
+  { id: 'astrotalk', name: 'Astrotalk', imgSrc: '/assets/Astrotalk_logo.png', scale: 1.2 },
+  { id: 'kapiva', name: 'Kapiva', imgSrc: '/assets/kapiva_logo.png' },
+  { id: 'jaro-education', name: 'Jaro Education',imgSrc: '/assets/Jaro_eductaion_logo.png' },
+  { id: 'pokerbaazi', name: 'Pokerbaazi', imgSrc: '/assets/pokerbazi_logo.jfif' },
+  { id: 'credit-mantri', name: 'Credit Mantri', imgSrc: '/assets/credit_mantri_logo.png', scale: 1.22 },
+  { id: 'dezy', name: 'Dezy', imgSrc: '/assets/dezy.jpg' },
+  { id: 'probo-media', name: 'Probo Media', imgSrc: '/assets/probo_media_logo.png', scale: 1.2 },
+  { id: 'club-oxygen', name: 'Club Oxygen', imgSrc: '/assets/club_oxygen_logo.jfif', scale: 1.16 },
+  { id: 'sunstone', name: 'Sunstone', imgSrc: '/assets/sunstone_logo.jfif', scale: 1.25 },
+  { id: 'relevel', name: 'Relevel', imgSrc: '/assets/Relevel_logo_3.jfif', scale: 1.18 },
+  { id: 'jiva-ayurveda', name: 'JIVA Ayurveda', imgSrc: '/assets/jiva_ayuerveda_logo.png' },
+  { id: 'early-salary', name: 'Early Salary', imgSrc: '/assets/early_salary_logo.jfif' },
 ];
+
+const ClientLogoCard: React.FC<{ client: ClientItem }> = ({ client }) => {
+  const Logo = client.Component;
+  const logoStyle = client.scale
+    ? ({ '--logo-scale': client.scale } as React.CSSProperties)
+    : undefined;
+
+  return (
+    <div className="client-card" title={client.name}>
+      {Logo ? (
+        <Logo className="client-logo-svg" style={logoStyle} />
+      ) : (
+        <img
+          src={client.imgSrc}
+          alt={client.name}
+          className="client-logo-svg client-logo-img"
+          style={logoStyle}
+          loading="lazy"
+        />
+      )}
+    </div>
+  );
+};
 
 const DESKTOP_PAGE_SIZE = 6;
 const MOBILE_PAGE_SIZE = 6;
@@ -163,14 +194,9 @@ export const FeaturedWork: React.FC = () => {
         <div className="clients-desktop-wrapper">
           {desktopSlides.length === 1 ? (
             <div className="clients-grid-desktop" aria-label="Clients Grid">
-              {desktopSlides[0].map((client) => {
-                const Logo = client.Component;
-                return (
-                  <div className="client-card" key={client.id} title={client.name}>
-                    <Logo className="client-logo-svg" />
-                  </div>
-                );
-              })}
+              {desktopSlides[0].map((client) => (
+                <ClientLogoCard key={client.id} client={client} />
+              ))}
             </div>
           ) : (
             <div
@@ -186,14 +212,9 @@ export const FeaturedWork: React.FC = () => {
                 {desktopSlides.map((slideClients, pageIdx) => (
                   <div className="clients-desktop-slide" key={pageIdx}>
                     <div className="clients-grid-desktop">
-                      {slideClients.map((client) => {
-                        const Logo = client.Component;
-                        return (
-                          <div className="client-card" key={client.id} title={client.name}>
-                            <Logo className="client-logo-svg" />
-                          </div>
-                        );
-                      })}
+                      {slideClients.map((client) => (
+                        <ClientLogoCard key={client.id} client={client} />
+                      ))}
                     </div>
                   </div>
                 ))}
@@ -233,14 +254,9 @@ export const FeaturedWork: React.FC = () => {
             {mobileSlides.map((slideClients, slideIdx) => (
               <div className="clients-mobile-slide" key={slideIdx}>
                 <div className="clients-grid-mobile">
-                  {slideClients.map((client) => {
-                    const Logo = client.Component;
-                    return (
-                      <div className="client-card" key={client.id} title={client.name}>
-                        <Logo className="client-logo-svg" />
-                      </div>
-                    );
-                  })}
+                  {slideClients.map((client) => (
+                    <ClientLogoCard key={client.id} client={client} />
+                  ))}
                 </div>
               </div>
             ))}
