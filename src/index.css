@@ -993,6 +993,7 @@ footer {
     justify-content: center;
     padding: 12px 18px;
     box-sizing: border-box;
+    overflow: hidden;
     transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
@@ -1129,9 +1130,12 @@ footer {
     }
 
     .clients-grid-mobile .client-logo-svg,
-    .clients-grid-mobile .client-logo-img {
+    .clients-grid-mobile .client-logo-img,
+    .clients-grid-mobile .client-card:hover .client-logo-svg,
+    .clients-grid-mobile .client-card:hover .client-logo-img {
         max-width: 92%;
         max-height: 58px;
+        transform: scale(var(--logo-mobile-scale, var(--logo-scale, 1)));
     }
 
     .clients-pagination-mobile {

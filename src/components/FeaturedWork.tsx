@@ -5,30 +5,31 @@ interface ClientItem {
   Component?: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
   imgSrc?: string;
   scale?: number;
+  mobileScale?: number;
 }
 
 const ALL_CLIENTS: ClientItem[] = [
-  { id: 'bajaj-capital', name: 'Bajaj Capital', imgSrc: '/assets/bajaj_capital_limited_logo.jfif' },
+  { id: 'bajaj-capital', name: 'Bajaj Capital', imgSrc: '/assets/bajaj_capital_limited_logo.jfif', scale: 1.95, mobileScale: 1.75 },
   { id: 'organic-india', name: 'Organic India', imgSrc: '/assets/organic_india_logo.png' },
   { id: 'maharishi-ayurveda', name: 'Maharishi Ayurveda', imgSrc: '/assets/maharishi_ayurveda_logo.jfif', scale: 1.15 },
   { id: 'exide-care', name: 'Exide Care', imgSrc: '/assets/Excide_care_logo.jpg' },
-  { id: 'unext', name: 'Unext', imgSrc: '/assets/Unext_logo_2.jpg', scale: 1.13 },
-  { id: 'uttranchal-university', name: 'Uttranchal University', imgSrc: '/assets/uttranchal_university_logo.jfif', scale: 1.2 },
+  { id: 'unext', name: 'Unext', imgSrc: '/assets/Unext_logo_2.jpg', scale: 2.95, mobileScale: 2.9 },
+  { id: 'uttranchal-university', name: 'Uttranchal University', imgSrc: '/assets/uttranchal_university_logo.jfif', scale: 0.95, mobileScale: 0.92 },
   { id: 'aditya-birla-capital', name: 'Aditya Birla Capital', imgSrc: '/assets/aditya_birla_capital_logo.webp' },
   { id: 'Omax', name: 'Omax', imgSrc: '/assets/omax_logo.jfif', scale: 1.15 },
-  { id: 'bajaj-finserv', name: 'Bajaj Finserv', imgSrc: '/assets/bajaj_finserv_logo.jfif', scale: 1.2 },
+  { id: 'bajaj-finserv', name: 'Bajaj Finserv', imgSrc: '/assets/bajaj_finserv_logo.jfif', scale: 0.96, mobileScale: 0.92 },
   { id: 'drinkprime', name: 'Drinkprime', imgSrc: '/assets/drinkprime_logo.png' },
-  { id: 'mtr', name: 'MTR', imgSrc: '/assets/MTR _logo_2.png' },
-  { id: 'matrimony-com', name: 'Matrimony.com', imgSrc: '/assets/Matrimmony.com_logo.png' },
+  { id: 'mtr', name: 'MTR', imgSrc: '/assets/MTR _logo_2.png', scale: 1.38, mobileScale: 1.32 },
+  { id: 'matrimony-com', name: 'Matrimony.com', imgSrc: '/assets/Matrimmony.com_logo.png', scale: 1.22, mobileScale: 1.08 },
   { id: 'astrotalk', name: 'Astrotalk', imgSrc: '/assets/Astrotalk_logo.png', scale: 1.2 },
   { id: 'kapiva', name: 'Kapiva', imgSrc: '/assets/kapiva_logo.png' },
   { id: 'jaro-education', name: 'Jaro Education',imgSrc: '/assets/Jaro_eductaion_logo.png' },
   { id: 'pokerbaazi', name: 'Pokerbaazi', imgSrc: '/assets/pokerbazi_logo.jfif' },
-  { id: 'credit-mantri', name: 'Credit Mantri', imgSrc: '/assets/credit_mantri_logo.png', scale: 1.22 },
+  { id: 'credit-mantri', name: 'Credit Mantri', imgSrc: '/assets/credit_mantri_logo.png', scale: 1.22, mobileScale: 0.98 },
   { id: 'dezy', name: 'Dezy', imgSrc: '/assets/dezy.jpg' },
-  { id: 'probo-media', name: 'Probo Media', imgSrc: '/assets/probo_media_logo.png', scale: 1.2 },
+  { id: 'probo-media', name: 'Probo Media', imgSrc: '/assets/probo_media_logo.png', scale: 0.95, mobileScale: 0.92 },
   { id: 'club-oxygen', name: 'Club Oxygen', imgSrc: '/assets/club_oxygen_logo.jfif', scale: 1.16 },
-  { id: 'sunstone', name: 'Sunstone', imgSrc: '/assets/sunstone_logo.jfif', scale: 1.25 },
+  { id: 'sunstone', name: 'Sunstone', imgSrc: '/assets/sunstone_logo.jfif', scale: 0.98, mobileScale: 0.92 },
   { id: 'relevel', name: 'Relevel', imgSrc: '/assets/Relevel_logo_3.jfif', scale: 1.18 },
   { id: 'jiva-ayurveda', name: 'JIVA Ayurveda', imgSrc: '/assets/jiva_ayuerveda_logo.png' },
   { id: 'early-salary', name: 'Early Salary', imgSrc: '/assets/early_salary_logo.jfif' },
@@ -36,8 +37,11 @@ const ALL_CLIENTS: ClientItem[] = [
 
 const ClientLogoCard: React.FC<{ client: ClientItem }> = ({ client }) => {
   const Logo = client.Component;
-  const logoStyle = client.scale
-    ? ({ '--logo-scale': client.scale } as React.CSSProperties)
+  const logoStyle = (client.scale || client.mobileScale)
+    ? ({
+        ...(client.scale ? { '--logo-scale': client.scale } : {}),
+        ...(client.mobileScale ? { '--logo-mobile-scale': client.mobileScale } : {}),
+      } as React.CSSProperties)
     : undefined;
 
   return (
