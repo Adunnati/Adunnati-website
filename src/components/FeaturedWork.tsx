@@ -9,7 +9,7 @@ interface ClientItem {
 }
 
 const ALL_CLIENTS: ClientItem[] = [
-  { id: 'bajaj-capital', name: 'Bajaj Capital', imgSrc: '/assets/bajaj_capital_limited_logo.jfif', scale: 1.95, mobileScale: 1.75 },
+  { id: 'bajaj-capital', name: 'Bajaj Capital', imgSrc: '/assets/bajaj_capital_limited_logo2.png', scale: 1.95, mobileScale: 1.75 },
   { id: 'organic-india', name: 'Organic India', imgSrc: '/assets/organic_india_logo.png' },
   { id: 'maharishi-ayurveda', name: 'Maharishi Ayurveda', imgSrc: '/assets/maharishi_ayurveda_logo.jfif', scale: 1.15 },
   { id: 'exide-care', name: 'Exide Care', imgSrc: '/assets/Excide_care_logo.jpg' },
@@ -20,7 +20,7 @@ const ALL_CLIENTS: ClientItem[] = [
   { id: 'bajaj-finserv', name: 'Bajaj Finserv', imgSrc: '/assets/bajaj_finserv_logo.jfif', scale: 0.96, mobileScale: 0.92 },
   { id: 'drinkprime', name: 'Drinkprime', imgSrc: '/assets/drinkprime_logo.png' },
   { id: 'mtr', name: 'MTR', imgSrc: '/assets/MTR _logo_2.png', scale: 1.38, mobileScale: 1.32 },
-  { id: 'matrimony-com', name: 'Matrimony.com', imgSrc: '/assets/Matrimmony.com_logo.png', scale: 1.22, mobileScale: 1.08 },
+  { id: 'matrimony-com', name: 'Matrimony.com', imgSrc: '/assets/Matrimmony.com_logo2.png', scale: 1.22, mobileScale: 1.18 },
   { id: 'astrotalk', name: 'Astrotalk', imgSrc: '/assets/Astrotalk_logo.png', scale: 1.2 },
   { id: 'kapiva', name: 'Kapiva', imgSrc: '/assets/kapiva_logo.png' },
   { id: 'jaro-education', name: 'Jaro Education',imgSrc: '/assets/Jaro_eductaion_logo.png' },
@@ -74,6 +74,9 @@ const chunkArray = <T,>(arr: T[], size: number): T[][] => {
 };
 
 export const FeaturedWork: React.FC = () => {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [isInView, setIsInView] = useState(false);
+
   // Compute chunks dynamically
   const desktopSlides = chunkArray(ALL_CLIENTS, DESKTOP_PAGE_SIZE);
   const mobileSlides = chunkArray(ALL_CLIENTS, MOBILE_PAGE_SIZE);
@@ -83,30 +86,50 @@ export const FeaturedWork: React.FC = () => {
   const [mobileSlide, setMobileSlide] = useState(0);
   const [isDesktopHovered, setIsDesktopHovered] = useState(false);
 
-  // Automatic continuous horizontal scrolling for desktop
+  // Only run slider when Clients section is scrolled into view
   useEffect(() => {
-    if (isDesktopHovered || desktopSlides.length <= 1) return;
+    const el = sectionRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') {
+      setIsInView(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        setIsInView(entry?.isIntersecting ?? false);
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // Automatic continuous horizontal scrolling for desktop (starts only when section is in view)
+  useEffect(() => {
+    if (!isInView || isDesktopHovered || desktopSlides.length <= 1) return;
 
     const timer = setInterval(() => {
       setDesktopSlide((prev) => (prev + 1) % desktopSlides.length);
     }, 3800);
 
     return () => clearInterval(timer);
-  }, [isDesktopHovered, desktopSlides.length]);
+  }, [isInView, isDesktopHovered, desktopSlides.length]);
 
-  // Automatic continuous horizontal scrolling for mobile
+  // Automatic continuous horizontal scrolling for mobile (starts only when section is in view)
   const [isMobileTouching, setIsMobileTouching] = useState(false);
   const touchResumeTimeout = useRef<number | null>(null);
 
   useEffect(() => {
-    if (isMobileTouching || mobileSlides.length <= 1) return;
+    if (!isInView || isMobileTouching || mobileSlides.length <= 1) return;
 
     const timer = setInterval(() => {
       setMobileSlide((prev) => (prev + 1) % mobileSlides.length);
     }, 3800);
 
     return () => clearInterval(timer);
-  }, [isMobileTouching, mobileSlides.length]);
+  }, [isInView, isMobileTouching, mobileSlides.length]);
 
   // Touch gesture support for mobile swiping
   const touchStartX = useRef<number | null>(null);
@@ -147,7 +170,7 @@ export const FeaturedWork: React.FC = () => {
   };
 
   return (
-    <section className="clients-section" id="partners" style={{ position: 'relative' }}>
+    <section ref={sectionRef} className="clients-section" id="partners" style={{ position: 'relative' }}>
       <span id="work" style={{ position: 'absolute', top: 0 }} aria-hidden="true" />
       <div className="container clients-container">
         {/* Header Block: Left title narrative + Right stat card */}
